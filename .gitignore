@@ -19,3 +19,12 @@
 *.exe
 *.out
 *.app
+
+# QT configuration files
+*.desktop
+*.pro.user
+*.pro.user*
+
+# QT build directories
+build*/
+*/android/
