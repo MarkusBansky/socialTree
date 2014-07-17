@@ -1,10 +1,11 @@
 #ifndef NODE_H
 #define NODE_H
 
-class node
+struct node
 {
-public:
-    node();
+  int key_value;
+  node *left;
+  node *right;
 };
 
 #endif // NODE_H
