@@ -28,9 +28,21 @@ struct sRequest {
         name = _name;
         parentName = _parentName;
     }
+
+    bool isNull() {
+        return
+                this->timestamp == 0 &&
+                this->cmd == ADD &&
+                this->name == "" &&
+                this->parentName == "";
+    }
+
+    static sRequest getNullRequest() {
+        sRequest req(0, ADD, "", "");
+        return req;
+    }
 };
 
-sRequest nullRequest(0, ADD, "", "");
 
 class RequestManager {
 public:

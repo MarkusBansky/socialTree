@@ -31,7 +31,7 @@ void RequestManager::ProcessLine(QString line) {
     QString parentNameString = "";
     if (requestList.size() == 4)
         parentNameString = requestList.at(3);
-    sRequest req = nullRequest;
+    sRequest req = sRequest::getNullRequest();
     req.timestamp = timestampString.toInt();
     if (cmdString == "ADD")
         req.cmd = ADD;
