@@ -57,5 +57,4 @@ private:
     void ProcessLine(QString line);
     void ReadDb();
 };
-
 #endif // REQUEST_H

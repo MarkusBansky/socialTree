@@ -2,8 +2,10 @@
 #include <QTextStream>
 #include <QStringList>
 
+RequestManager* RequestManager::RequestManagerInstance;
+
 RequestManager* RequestManager::GetRequestManagerInstance() {
-    if (!(RequestManagerInstance))
+    if (!RequestManagerInstance)
         RequestManagerInstance = new RequestManager();
     return RequestManagerInstance;
 }
