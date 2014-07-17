@@ -11,14 +11,14 @@ class RequestProvider : public QObject
 public:
     explicit RequestProvider(QObject *parent = 0);
     RequestProvider(RequestManager* _reqManager);
-    Q_INVOKABLE void onTimer();
+
 private:
     ull time;
     RequestManager* reqManager;
 signals:
 
 public slots:
-
+    void onTimer();
 };
 
 #endif // REQUESTPROVIDER_H
