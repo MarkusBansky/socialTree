@@ -5,7 +5,6 @@
 
 tree::tree() {
     root = NULL;
-
 }
 
 tree::~tree() {
@@ -65,6 +64,25 @@ node *tree::search(int key, node *leaf)
 node *tree::search(int key)
 {
   return search(key, root);
+}
+
+node *tree::strSearch(QString name, node *leaf)
+{
+  if(leaf!=NULL)
+  {
+    if(name==leaf->name)
+      return leaf;
+    if(name<leaf->name)
+      return strSearch(name, leaf->left);
+    else
+      return strSearch(name, leaf->right);
+  }
+  else return NULL;
+}
+
+node *tree::strSearch(QString name)
+{
+  return strSearch(name, root);
 }
 
 void tree::insert(int key)

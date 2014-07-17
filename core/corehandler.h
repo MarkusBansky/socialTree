@@ -5,9 +5,10 @@
 class coreHandler
 {
 public:
-    coreHandler();
-
     void processRequest(sRequest r);
+private:
+    void addCase();
+    void deleteCase();
 };
 
 #endif // COREHANDLER_H
