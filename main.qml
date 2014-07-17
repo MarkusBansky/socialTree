@@ -56,6 +56,16 @@ Item {
             running: true
         }
     }
+
+    Item {
+        Timer {
+            interval: 1000;
+            repeat: true;
+            running: true;
+            onTriggered: reqProvider.onTimer();
+        }
+    }
+
 //! [1] //! [2]
     Rectangle {
         color: Qt.rgba(1, 1, 1, 0.7)

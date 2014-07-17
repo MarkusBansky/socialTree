@@ -45,8 +45,11 @@
 
 #include "opengl/squircle.h"
 
+#include <QQmlContext>
+
 #include "request/request.h"
 #include "request/requestmanager.h"
+#include "request/requestprovider.h"
 
 #include <iostream>
 
@@ -57,9 +60,12 @@ int main(int argc, char **argv)
     qmlRegisterType<Squircle>("OpenGLUnderQML", 1, 0, "Squircle");
 
     QQuickView view;
+    QQmlContext* ctx = view.rootContext();
+    RequestManager* reqManager = RequestManager::getRequestManagerInstance();
+    RequestProvider* reqProvider = new RequestProvider(reqManager);
+    (*ctx).setContextProperty("reqProvider", reqProvider);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.setSource(QUrl("qrc:///scenegraph/openglunderqml/main.qml"));
     view.show();
-    RequestManager* r = RequestManager::getRequestManagerInstance();
     return app.exec();
 }
