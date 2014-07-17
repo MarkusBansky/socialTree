@@ -8,6 +8,12 @@ QString gParentName;
 ull gTimestamp;
 eCommand gCmd;
 
+tree Tree = tree();
+
+tree coreHandler::getTree(){
+    return Tree;
+}
+
 void coreHandler::processRequest(sRequest r){
     gName = r.name;
     gParentName = r.parentName;
@@ -26,7 +32,8 @@ void coreHandler::processRequest(sRequest r){
 
 void coreHandler::addCase(){
     //search for parrent
-    //int key = tree.strSearch(qParentName);
+    node* parent = Tree .strSearch(gParentName);
+    int key = parent->key_value;
 }
 
 void coreHandler::deleteCase(){
