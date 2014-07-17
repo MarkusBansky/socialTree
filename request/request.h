@@ -42,19 +42,4 @@ struct sRequest {
         return req;
     }
 };
-
-
-class RequestManager {
-public:
-    static RequestManager* GetRequestManagerInstance();
-    sRequest getNextRequest(ull time);
-private:
-    int requestIndex;
-    RequestManager();
-    static RequestManager* RequestManagerInstance;
-    std::vector <sRequest> Requests;
-    QFile input;
-    void ProcessLine(QString line);
-    void ReadDb();
-};
 #endif // REQUEST_H

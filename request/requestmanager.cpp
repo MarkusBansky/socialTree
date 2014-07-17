@@ -1,10 +1,11 @@
+#include "requestmanager.h"
 #include "request.h"
 #include <QTextStream>
 #include <QStringList>
 
 RequestManager* RequestManager::RequestManagerInstance;
 
-RequestManager* RequestManager::GetRequestManagerInstance() {
+RequestManager* RequestManager::getRequestManagerInstance() {
     if (!RequestManagerInstance)
         RequestManagerInstance = new RequestManager();
     return RequestManagerInstance;
@@ -12,10 +13,12 @@ RequestManager* RequestManager::GetRequestManagerInstance() {
 
 RequestManager::RequestManager() {
     requestIndex = 0;
+    FILEPATH = "requests.dat";
     ReadDb();
 }
 
 void RequestManager::ReadDb() {
+    QFile input(FILEPATH);
     if (!input.open(QIODevice::ReadOnly | QIODevice::Text))
              return;
     QTextStream in(&input);
@@ -24,6 +27,7 @@ void RequestManager::ReadDb() {
         line = in.readLine();
         ProcessLine(line);
     }
+    input.close();
 }
 
 void RequestManager::ProcessLine(QString line) {
@@ -47,8 +51,8 @@ void RequestManager::ProcessLine(QString line) {
 
 sRequest RequestManager::getNextRequest(ull time) {
     if (requestIndex >= Requests.size())
-        return sRequest(0, ADD, "", "");
+        return sRequest::getNullRequest();
     if (time >= Requests[requestIndex].timestamp)
-        return sRequest(0, ADD, "", "");
+        return sRequest::getNullRequest();
     return Requests[requestIndex++];
 }

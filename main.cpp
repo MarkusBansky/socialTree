@@ -45,7 +45,10 @@
 
 #include "opengl/squircle.h"
 
-//#include "request/request.h"
+#include "request/request.h"
+#include "request/requestmanager.h"
+
+#include <iostream>
 
 int main(int argc, char **argv)
 {
@@ -57,6 +60,6 @@ int main(int argc, char **argv)
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.setSource(QUrl("qrc:///scenegraph/openglunderqml/main.qml"));
     view.show();
-    //RequestManager* r = RequestManager::GetRequestManagerInstance();
+    RequestManager* r = RequestManager::getRequestManagerInstance();
     return app.exec();
 }
