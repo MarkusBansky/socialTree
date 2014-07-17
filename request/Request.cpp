@@ -12,6 +12,7 @@ RequestManager* RequestManager::GetRequestManagerInstance() {
 
 RequestManager::RequestManager() {
     requestIndex = 0;
+    ReadDb();
 }
 
 void RequestManager::ReadDb() {

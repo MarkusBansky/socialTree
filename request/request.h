@@ -1,6 +1,7 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 typedef unsigned long long int ull;
+#undef DELETE
 
 #include <vector>
 #include <QString>
@@ -8,8 +9,7 @@ typedef unsigned long long int ull;
 #include <QString>
 
 enum eCommand {
-    ADD,
-    DELETE
+    ADD, DELETE
 };
 
 struct sRequest {
