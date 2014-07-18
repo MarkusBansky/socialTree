@@ -13,32 +13,36 @@ tree::~tree() {
 
 void tree::destroy_tree(node *leaf){
     if(leaf!=NULL){
-        destroy_tree(leaf->left);
-        destroy_tree(leaf->right);
+        for (int i = 0; i < (*leaf).nodes.size(); i++)
+            destroy_tree((*leaf).nodes[i]);
         delete leaf;
     }
 }
 
 void tree::insert(QString name, node *leaf)
 {
-      //leaf->left=new node;
-      //leaf->left->key_value=key;
-      //leaf->left->left=NULL;    //Sets the left child of the child node to null
-      //leaf->left->right=NULL;   //Sets the right child of the child node to null
+      (*leaf).nodes.push_back(new node(name));
 }
 
 node *tree::search(QString name, node *leaf)
 {
   if(leaf!=NULL)
   {
-    if(name==leaf->name)
-      return leaf;
-    if(name<leaf->name)
-      return search(name, leaf->left);
-    else
-      return search(name, leaf->right);
+      if ((*leaf).name == name)
+          return leaf;
+      node* tmpNode;
+      for (int i = 0; i < (*leaf).nodes.size(); i++)
+      {
+          tmpNode = search(name, (*leaf).nodes[i]);
+          if (tmpNode != NULL)
+          {
+              return tmpNode;
+          }
+      }
+      return NULL;
   }
-  else return NULL;
+  else
+      return NULL;
 }
 
 node *tree::search(QString name)
@@ -46,17 +50,9 @@ node *tree::search(QString name)
   return search(name, root);
 }
 
-void tree::insert(QString name)
+void tree::insertRoot(QString name)
 {
-  if(root!=NULL)
-    insert(name, root);
-  else
-  {
-    root=new node;
-    root->name = name;
-    root->left=NULL;
-    root->right=NULL;
-  }
+    root=new node(name);
 }
 
 void tree::destroy_tree()
