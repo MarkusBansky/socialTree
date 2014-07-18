@@ -65,7 +65,7 @@ void MainWidget::resizeGL(int w, int h)
     // Reset projection
     projection.setToIdentity();
     // Set orthographic projection
-    projection.ortho(0, 800, 600, 0, 0.1, 1000);
+    projection.ortho(-400, 400, -300, 300, 0.1, 1000);
 }
 
 void MainWidget::paintGL()
