@@ -19,6 +19,7 @@ public:
 
     private:
         void destroy_tree(node *leaf);
+        node* searchParent(QString name, node *leaf);
         node *search(QString name, node *leaf);
 
         node *root;

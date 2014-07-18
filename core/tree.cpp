@@ -85,7 +85,7 @@ void tree::deleteNode(QString name)
         if (nodeForDel == nodeForDel_Parent->nodes[i])
             nodeForDel_Parent->nodes.erase(
                         nodeForDel_Parent->nodes.begin() + i);
-    destroy_tree(nodeForDeleting);
+    destroy_tree(nodeForDel);
 }
 
 void tree::destroy_tree()
