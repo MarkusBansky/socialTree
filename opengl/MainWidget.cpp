@@ -32,7 +32,7 @@ void MainWidget::initializeGL()
 
     initShaders();
 
-    qglClearColor(Qt::black);
+    qglClearColor(Qt::white);
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
