@@ -80,6 +80,7 @@ void VBORender::genVBOs()
         {
             genVBO(start, i - 1);
             start = i;
+            ind = modeBuffer_[i];
         }
     }
     genVBO(start, modeBuffer_.size() - 1);
