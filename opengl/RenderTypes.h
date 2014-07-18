@@ -4,21 +4,6 @@
 #include <vector>
 #include <QtGlobal>
 
-struct Line2F
-{
-    Vertex2F start, end;
-};
-
-struct Line3F
-{
-    Vertex3F start, end;
-};
-
-struct Line4F
-{
-    Vertex4F start, end;
-};
-
 struct Vertex2F
 {
     float x, y;
@@ -32,6 +17,21 @@ struct Vertex3F
 struct Vertex4F
 {
     float x, y, z, w;
+};
+
+struct Line2F
+{
+    Vertex2F start, end;
+};
+
+struct Line3F
+{
+    Vertex3F start, end;
+};
+
+struct Line4F
+{
+    Vertex4F start, end;
 };
 
 struct Color
