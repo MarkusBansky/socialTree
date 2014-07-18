@@ -32,12 +32,13 @@ void coreHandler::processRequest(sRequest r){
 
 void coreHandler::addCase(){
     //search for parrent
-    //if(qParentName != "NULL"){
-    //    node* parent = Tree.strSearch(gParentName);
-    //}
-    //else{
-        //Tree.strInsert(root");
-    //}
+    if(this->qParentName != "NULL"){
+        node* parent = Tree.strSearch(this->gParentName);
+        Tree.insert(gName, parent);
+    }
+    else{
+        Tree.insert("root");
+    }
 }
 
 void coreHandler::deleteCase(){
