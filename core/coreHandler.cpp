@@ -31,8 +31,8 @@ void coreHandler::processRequest(sRequest r){
 }
 
 void coreHandler::addCase(){
-    if(this->qParentName != "NULL"){
-        node* parent = Tree.strSearch(this->gParentName);
+    if(this->gParentName != "NULL"){
+        node* parent = Tree.search(this->gParentName);
         Tree.insert(gName, parent);
     }
     else{
@@ -41,5 +41,6 @@ void coreHandler::addCase(){
 }
 
 void coreHandler::deleteCase(){
-
+    node* parent = Tree.strSearch(this->gParentName);
+    //Tree.delete();
 }
