@@ -31,17 +31,15 @@ void coreHandler::processRequest(sRequest r){
 }
 
 void coreHandler::addCase(){
-    //search for parrent
     if(this->qParentName != "NULL"){
         node* parent = Tree.strSearch(this->gParentName);
         Tree.insert(gName, parent);
     }
     else{
-        Tree.insert("root");
+        Tree.insertRoot("root");
     }
 }
 
 void coreHandler::deleteCase(){
-
 
 }
