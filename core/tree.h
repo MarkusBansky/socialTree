@@ -13,7 +13,7 @@ public:
 
         void insertRoot(QString name);
         void insert(QString name, node *leaf);
-        void deleteNode(QString name, node *leaf);
+        void deleteNode(QString name);
         node *search(QString name);
         void destroy_tree();
 
