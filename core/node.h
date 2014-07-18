@@ -4,7 +4,6 @@
 
 struct node
 {
-  int key_value;
   QString name;
   node *left;
   node *right;

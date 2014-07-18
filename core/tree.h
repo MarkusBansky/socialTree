@@ -11,16 +11,14 @@ public:
         tree();
         ~tree();
 
-        void insert(int key);
-        node *search(int key);
-        node *strSearch(QString name);
+        void insert(QString name);
+        node *search(QString name);
         void destroy_tree();
 
     private:
         void destroy_tree(node *leaf);
-        void insert(int key, node *leaf);
-        node *search(int key, node *leaf);
-        node *strSearch(QString name, node *leaf);
+        void insert(QString name, node *leaf);
+        node *search(QString name, node *leaf);
 
         node *root;
 };
