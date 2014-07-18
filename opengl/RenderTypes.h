@@ -11,12 +11,12 @@ struct Line2F
 
 struct Line3F
 {
-    Vertex2F start, end;
+    Vertex3F start, end;
 };
 
 struct Line4F
 {
-    Vertex2F start, end;
+    Vertex4F start, end;
 };
 
 struct Vertex2F
