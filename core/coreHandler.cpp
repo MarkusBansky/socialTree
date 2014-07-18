@@ -41,6 +41,5 @@ void coreHandler::addCase(){
 }
 
 void coreHandler::deleteCase(){
-    node* parent = Tree.search(this->gParentName);
-    //Tree.delete();
+    Tree.deleteNode(this->gName);
 }
