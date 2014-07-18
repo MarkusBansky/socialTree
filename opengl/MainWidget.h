@@ -9,7 +9,8 @@
 #include <QVector2D>
 #include <QBasicTimer>
 #include <QtOpenGL/QGLShaderProgram>
-#include <opengl/VBORender.h>
+#include "VBORender.h"
+#include "../core/scenegraph.h"
 
 
 class MainWidget : public QGLWidget, protected QGLFunctions
@@ -32,6 +33,7 @@ protected:
     void initShaders();
     void initTextures();
 
+    void updateScene();
 private:
     QBasicTimer timer;
     QGLShaderProgram program;

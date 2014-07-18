@@ -10,6 +10,9 @@ MainWidget::MainWidget(QWidget *parent) :
 
 MainWidget::~MainWidget()
 {
+    //Clear render data
+    render.clearVBOs();
+    render.clearBuffers();
 }
 
 void MainWidget::mousePressEvent(QMouseEvent *e)
@@ -18,11 +21,14 @@ void MainWidget::mousePressEvent(QMouseEvent *e)
 
 void MainWidget::mouseReleaseEvent(QMouseEvent *e)
 {
+    SceneGraph::lines.push_back({{qrand()%800 - 400, qrand()%600 - 300}, {qrand()%800 - 400, qrand()%600 - 300}});
+    SceneGraph::rectangles.push_back({{qrand()%800 - 400, qrand()%600 - 300}, qrand()%50 + 50});
+    updateScene();
 }
 
 void MainWidget::timerEvent(QTimerEvent *)
 {
-  updateGL();
+    updateGL();
 }
 
 void MainWidget::initializeGL()
@@ -80,18 +86,46 @@ void MainWidget::paintGL()
     // Set modelview-projection matrix
     program.setUniformValue("mvp_matrix", projection * matrix);
 
-    //Draw test triangle
-    render.setColor(0.5, 0.5, 0.5, 0.5);
-    render.textureDisable();
-    render.drawStart(GL_TRIANGLES);
-      render.vertexAdd(0, 0, 0);
-      render.vertexAdd(300, 300, 0);
-      render.vertexAdd(600, 0, 0);
-    render.drawStop();
-
-    render.genVBOs();
-    render.registerVBOs();
     render.drawVBOs(&program);
+}
+
+void MainWidget::updateScene()
+{
+    //Clear previous data
     render.clearVBOs();
     render.clearBuffers();
+
+    //Draw lines
+    render.setColor(1.0, 0.0, 0.0, 1.0);
+    render.drawStart(GL_LINES);
+        for (size_t i = 0; i < SceneGraph::lines.size(); i++)
+        {
+            render.vertexAdd(SceneGraph::lines[i].start.x, SceneGraph::lines[i].start.y, 1.0);
+            render.vertexAdd(SceneGraph::lines[i].end.x, SceneGraph::lines[i].end.y, 1.0);
+        }
+    render.drawStop();
+
+    //Draw rectangles
+    render.setColor(1.0, 0.0, 0.0, 1.0);
+    render.drawStart(GL_TRIANGLES);
+        for (size_t i = 0; i < SceneGraph::rectangles.size(); i++)
+        {
+            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+        }
+    render.drawStop();
+
+    //Prepare data
+    render.genVBOs();
+    render.registerVBOs();
 }
