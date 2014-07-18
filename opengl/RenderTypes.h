@@ -4,7 +4,17 @@
 #include <vector>
 #include <QtGlobal>
 
-struct Vertex
+struct Vertex2F
+{
+    float x, y;
+};
+
+struct Vertex3F
+{
+    float x, y, z;
+};
+
+struct Vertex4F
 {
     float x, y, z, w;
 };
@@ -20,7 +30,7 @@ struct TextureCoordinates
 };
 
 typedef std::vector<uint> ModeBuffer;
-typedef std::vector<Vertex> VertexBuffer;
+typedef std::vector<Vertex4F> VertexBuffer;
 typedef std::vector<Color> ColorBuffer;
 typedef std::vector<TextureCoordinates> TextureCoordinatesBuffer;
 typedef std::vector<uint> TextureIndexBuffer;

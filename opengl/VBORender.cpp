@@ -18,7 +18,7 @@ VBORender::~VBORender()
 void VBORender::vertexAdd(float x, float y, float z)
 {
     modeBuffer_.push_back(currentMode_);
-    Vertex vertex = {x, y, z, 1.0};
+    Vertex4F vertex = {x, y, z, 1.0};
     vertexBuffer_.push_back(vertex);
     colorBuffer_.push_back(currentColor_);
     textureIndBuffer_.push_back(currentTexture_);
@@ -90,7 +90,7 @@ void VBORender::registerVBOs()
 {
     for (size_t i = 0; i < subBuffers_.size(); i++)
     {
-        size_t vSize = sizeof(Vertex)*subBuffers_[i].count,
+        size_t vSize = sizeof(Vertex4F)*subBuffers_[i].count,
                cSize = sizeof(Color)*subBuffers_[i].count,
                tSize = sizeof(TextureCoordinates)*subBuffers_[i].count;
 
@@ -111,7 +111,7 @@ void VBORender::drawVBOs(QGLShaderProgram* program)
 {
     for (size_t i = 0; i < subBuffers_.size(); i++)
     {
-        size_t vSize = sizeof(Vertex)*subBuffers_[i].count,
+        size_t vSize = sizeof(Vertex4F)*subBuffers_[i].count,
                cSize = sizeof(Color)*subBuffers_[i].count,
                tSize = sizeof(TextureCoordinates)*subBuffers_[i].count;
 
