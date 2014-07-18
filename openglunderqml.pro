@@ -8,7 +8,8 @@ HEADERS += request/request.h \
     opengl/MainWidget.h \
     opengl/VBORender.h \
     request/requestmanager.h \
-    request/requestprovider.h
+    request/requestprovider.h \
+    core/scenegraph.h
 SOURCES += main.cpp \
     core/tree.cpp \
     core/node.cpp \
@@ -16,7 +17,8 @@ SOURCES += main.cpp \
     opengl/MainWidget.cpp \
     opengl/VBORender.cpp \
     request/requestmanager.cpp \
-    request/requestprovider.cpp
+    request/requestprovider.cpp \
+    core/scenegraph.cpp
 RESOURCES += opengl/shaders.qrc
 
 target.path = $$[QT_INSTALL_EXAMPLES]/quick/scenegraph/openglunderqml
