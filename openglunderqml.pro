@@ -12,7 +12,6 @@ HEADERS += request/request.h \
     core/scenegraph.h
 SOURCES += main.cpp \
     core/tree.cpp \
-    core/node.cpp \
     core/coreHandler.cpp \
     opengl/MainWidget.cpp \
     opengl/VBORender.cpp \
