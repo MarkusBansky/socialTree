@@ -8,6 +8,7 @@
 #include "request/request.h"
 #include "request/requestmanager.h"
 #include "request/requestprovider.h"
+#include "core/corehandler.h"
 
 #include <iostream>
 
@@ -18,7 +19,8 @@ int main(int argc, char *argv[])
     app.setApplicationVersion("0.1");
 
     RequestManager* reqManager = RequestManager::getRequestManagerInstance();
-    RequestProvider* reqProvider = new RequestProvider(reqManager);
+    coreHandler* handler = new coreHandler();
+    RequestProvider* reqProvider = new RequestProvider(reqManager, handler);
 
     QTimer* reqTimer = new QTimer();
     reqTimer->setInterval(1000);

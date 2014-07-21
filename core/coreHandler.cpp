@@ -10,7 +10,7 @@ QString gParentName;
 ull gTimestamp;
 eCommand gCmd;
 
-tree Tree = tree();
+tree Tree;
 
 tree coreHandler::getTree(){
     return Tree;
@@ -42,7 +42,7 @@ void coreHandler::addCase(){
         Tree.insert(gName, parent);
     }
     else{
-        Tree.insertRoot("root");
+        Tree.insertRoot(gName);
     }
 }
 

@@ -13,7 +13,7 @@ RequestManager* RequestManager::getRequestManagerInstance() {
 
 RequestManager::RequestManager() {
     requestIndex = 0;
-    FILEPATH = "C:\\Users\\Markiyan.Benovskyy\\Documents\\GitHub\\socialTree\\requests.dat";
+    FILEPATH = "requests.dat";
     ReadDb();
 }
 
@@ -52,7 +52,7 @@ void RequestManager::ProcessLine(QString line) {
 sRequest RequestManager::getNextRequest(ull time) {
     if (requestIndex >= Requests.size())
         return sRequest::getNullRequest();
-    if (time >= Requests[requestIndex].timestamp)
+    if (time < Requests[requestIndex].timestamp)
         return sRequest::getNullRequest();
     return Requests[requestIndex++];
 }
