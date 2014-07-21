@@ -17,11 +17,6 @@ public:
     SceneGraph();
     static std::vector<Line2F> lines;
     static std::vector<SceneRectangle> rectangles;
-private:
-    int levelD;
-    int dA;
-
-    void GenerateRectangleCoordinates(node* Node);
 };
 
 #endif // SCENEGRAPH_H
