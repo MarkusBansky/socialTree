@@ -42,7 +42,7 @@ void MainWidget::mouseMoveEvent(QMouseEvent *e)
 {
     if (isMoving_)
     {
-        QPointF delta = (lastPos_ - e->pos())/scale_;
+        QPointF delta = e->pos() - lastPos_;
         centerOffset_ += delta;
         lastPos_ = e->pos();
         updateProjection();
@@ -113,10 +113,8 @@ void MainWidget::updateProjection()
     // Reset projection
     projection.setToIdentity();
     // Set orthographic projection, where scene (0, 0) is at window (window.width/2, TOP_OFFSET)
-    projection.ortho((-DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x()) / scale_,
-                      (DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x()) / scale_,
-                     (-TOP_OFFSET + DEFAULT_WINDOW_HEIGHT + centerOffset_.y()) / scale_,
-                     (-TOP_OFFSET + centerOffset_.y()) / scale_, 0.1, 1000);
+    projection.ortho(-DEFAULT_WINDOW_WIDTH/2, DEFAULT_WINDOW_WIDTH/2,
+                     -TOP_OFFSET + DEFAULT_WINDOW_HEIGHT, -TOP_OFFSET, 0.1, 1000);
 }
 
 void MainWidget::paintGL()
@@ -126,7 +124,8 @@ void MainWidget::paintGL()
 
     // Calculate model view matrix
     QMatrix4x4 matrix;
-    matrix.translate(0.0, 0.0, -100.0);
+    matrix.translate(centerOffset_.x(), centerOffset_.y(), -100.0);
+    matrix.scale(scale_);
 
     // Set modelview-projection matrix
     program.setUniformValue("mvp_matrix", projection * matrix);
