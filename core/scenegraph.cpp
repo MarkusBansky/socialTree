@@ -46,6 +46,7 @@ void SceneGraph::SetChildCount(node *leaf){
         leaf->Childs++;
 }
 
+<<<<<<< HEAD
 void SceneGraph::CheckCollisions(node *leaf){
     for(int i = 0; i<leaf->nodes.size(); i++){
         CheckCollisions(leaf->nodes[i]);
@@ -63,6 +64,16 @@ void SceneGraph::CheckCollisions(node *leaf){
 
 void SceneGraph::SetOffset(node *leaf, int offset){
     leaf->x = leaf->x + offset;
+=======
+    int offset = myX - parentX;
+    if(offset!=0 && leaf->parent != NULL)
+        SceneGraph::SetOffset(leaf->parent, offset);
+}
+
+void SceneGraph::SetOffset(node *leaf, int offset){
+    if(leaf->parent != NULL)
+        leaf->x = leaf->x - offset;
+>>>>>>> origin/master
     for(int i = 0; i<leaf->nodes.size(); i++){
         SetOffset(leaf->nodes[i], offset);
     }
