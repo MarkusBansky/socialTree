@@ -7,10 +7,12 @@ struct node
 {
   QString name;
   std::vector <node*> nodes;
+  node* parent;
 
-  node(QString _name)
+  node(QString _name, node* _parent)
   {
       name = _name;
+      parent = _parent;
   }
 };
 
