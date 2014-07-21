@@ -21,10 +21,10 @@ void SceneGraph::SetCoords(node* leaf){
     if (leaf->parent != NULL)
         lines.push_back({{leaf->parent->x, leaf->parent->y},
                                          {leaf->x, leaf->y}});
+    rectangles.push_back({{leaf->x, leaf->y}, SQUARE_W*1.0f});
     for(int i =0; i<childCount; i++){
         leaf->nodes[i]->x = lMargin + SQUARE_W/2 + (SQUARE_W+PADDING_X)*i;
         SetCoords(leaf->nodes[i]);
-        rectangles.push_back({{leaf->x, leaf->y}, SQUARE_W*1.0f});
     }
 
 }
