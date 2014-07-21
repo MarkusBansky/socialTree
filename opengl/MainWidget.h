@@ -58,4 +58,6 @@ private:
     const float SCALING_SPEED = 1.001;
 };
 
+extern MainWidget* widget;
+
 #endif // MAINWIDGET_H

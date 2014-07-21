@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
     QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
     reqTimer->start();
 #ifndef QT_NO_OPENGL
-    MainWidget widget;
-    widget.show();
+    widget = new MainWidget();
+    widget->show();
 #else
     QLabel note("OpenGL Support required");
     note.show();

@@ -3,6 +3,8 @@
 #include <math.h>
 #include <QMouseEvent>
 
+MainWidget* widget;
+
 MainWidget::MainWidget(QWidget *parent) :
     QGLWidget(parent)
 {
