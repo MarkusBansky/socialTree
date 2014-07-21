@@ -2,7 +2,7 @@
 #define COREHANDLER_H
 #include "../request/request.h"
 #include "tree.h"
-#define ull unsigned long long int
+typedef unsigned long long int ull;
 
 class coreHandler
 {

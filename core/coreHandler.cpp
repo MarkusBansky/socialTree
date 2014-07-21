@@ -1,6 +1,8 @@
 #include "corehandler.h"
 #include "../request/request.h"
 #include "tree.h"
+#include "scenegraph.h"
+#include "../opengl/MainWidget.h"
 #define ull unsigned long long int
 
 QString gName;
@@ -28,6 +30,9 @@ void coreHandler::processRequest(sRequest r){
         deleteCase();
         break;
     }
+
+    SceneGraph::Magica(&Tree);
+    //ссилка на опенджіел
 }
 
 void coreHandler::addCase(){

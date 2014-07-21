@@ -4,6 +4,8 @@
 
 #include "node.h"
 #include "../opengl/RenderTypes.h"
+#include "corehandler.h"
+#include "tree.h"
 
 struct SceneRectangle
 {
@@ -14,7 +16,7 @@ struct SceneRectangle
 class SceneGraph
 {
 public:
-    SceneGraph();
+    static void Magica(tree* Tree);
     static std::vector<Line2F> lines;
     static std::vector<SceneRectangle> rectangles;
 };
