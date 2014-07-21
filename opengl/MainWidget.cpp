@@ -6,6 +6,7 @@
 MainWidget::MainWidget(QWidget *parent) :
     QGLWidget(parent)
 {
+    centerOffset_ = QPointF(0.0, 0.0);
 }
 
 MainWidget::~MainWidget()
@@ -17,13 +18,42 @@ MainWidget::~MainWidget()
 
 void MainWidget::mousePressEvent(QMouseEvent *e)
 {
+    if (e->button() == Qt::LeftButton)
+    {
+        isMoving_ = true;
+        lastPos_ = e->pos();
+    }
 }
 
 void MainWidget::mouseReleaseEvent(QMouseEvent *e)
 {
-    SceneGraph::lines.push_back({{qrand()%800 - 400, qrand()%600 - 300}, {qrand()%800 - 400, qrand()%600 - 300}});
-    SceneGraph::rectangles.push_back({{qrand()%800 - 400, qrand()%600 - 300}, qrand()%50 + 50});
+    switch (e->button()) {
+    case Qt::LeftButton:
+        isMoving_ = false;
+        break;
+    default:
+//        SceneGraph::lines.push_back({{0, }, {qrand()%800 - 400, qrand()%600 - 300}});
+        SceneGraph::lines.push_back({{0, 0}, {0, 10000}});
+        SceneGraph::lines.push_back({{0, 0}, {10000, 0}});
+        SceneGraph::rectangles.push_back({{0, 0}, 60});
+        SceneGraph::rectangles.push_back({{0, 100}, 60});
+        SceneGraph::rectangles.push_back({{100, 100}, 60});
+//        SceneGraph::lines.push_back({{qrand()%800 - 400, qrand()%600 - 300}, {qrand()%800 - 400, qrand()%600 - 300}});
+//        SceneGraph::rectangles.push_back({{qrand()%800 - 400, qrand()%600 - 300}, qrand()%50 + 50});
+        break;
+    }
     updateScene();
+}
+
+void MainWidget::mouseMoveEvent(QMouseEvent *e)
+{
+    if (isMoving_)
+    {
+        QPointF delta = lastPos_ - e->pos();
+        centerOffset_ += delta;
+        lastPos_ = e->pos();
+        updateProjection();
+    }
 }
 
 void MainWidget::timerEvent(QTimerEvent *)
@@ -68,10 +98,19 @@ void MainWidget::resizeGL(int w, int h)
     // Set OpenGL viewport to cover whole widget
     glViewport(0, 0, w, h);
 
+    updateProjection();
+}
+
+void MainWidget::updateProjection()
+{
+    const int TOP_OFFSET = 100;
     // Reset projection
     projection.setToIdentity();
-    // Set orthographic projection
-    projection.ortho(-400, 400, -300, 300, 0.1, 1000);
+    // Set orthographic projection, where scene (0, 0) is at window (window.width/2, TOP_OFFSET)
+    projection.ortho(-DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x(),
+                      DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x(),
+                     -TOP_OFFSET + DEFAULT_WINDOW_HEIGHT + centerOffset_.y(),
+                     -TOP_OFFSET + centerOffset_.y(), 0.1, 1000);
 }
 
 void MainWidget::paintGL()
@@ -96,7 +135,7 @@ void MainWidget::updateScene()
     render.clearBuffers();
 
     //Draw lines
-    render.setColor(1.0, 0.0, 0.0, 1.0);
+    render.setColor(0.0, 0.0, 1.0, 1.0);
     render.drawStart(GL_LINES);
         for (size_t i = 0; i < SceneGraph::lines.size(); i++)
         {

@@ -24,6 +24,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
     void timerEvent(QTimerEvent *e);
 
     void initializeGL();
@@ -34,14 +35,23 @@ protected:
     void initTextures();
 
     void updateScene();
+    void updateProjection();
 private:
     QBasicTimer timer;
     QGLShaderProgram program;
 
+
     VBORender render;
+
+    bool isMoving_;
+    QPoint lastPos_;
+    QPointF centerOffset_;
 
 
     QMatrix4x4 projection;
+
+    const int DEFAULT_WINDOW_WIDTH = 800;
+    const int DEFAULT_WINDOW_HEIGHT = 600;
 };
 
 #endif // MAINWIDGET_H
