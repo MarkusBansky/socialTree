@@ -5,9 +5,3 @@
 5 ADD name5 name2
 6 ADD name6 name2
 7 ADD name7 name2
-8 ADD name8 name3
-9 ADD name9 name3
-10 ADD name10 name4
-11 ADD name11 name4
-12 ADD name12 name4
-13 DELETE name12
