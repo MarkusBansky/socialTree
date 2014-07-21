@@ -49,9 +49,6 @@ void SceneGraph::SetChildCount(node *leaf){
 }
 
 void SceneGraph::CheckCollisions(node *leaf){
-    for(int i = 0; i<leaf->nodes.size(); i++){
-        CheckCollisions(leaf->nodes[i]);
-    }
     if(leaf->parent != NULL){
         int offset = 0;
         if(leaf->Childs != 0){
@@ -74,6 +71,9 @@ void SceneGraph::CheckCollisions(node *leaf){
     }
     else{
         rectangles.push_back({{leaf->x, leaf->y}, SQUARE_W*1.0f});
+    }
+    for(int i = 0; i<leaf->nodes.size(); i++){
+        CheckCollisions(leaf->nodes[i]);
     }
 }
 
