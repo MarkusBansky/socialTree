@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     RequestProvider* reqProvider = new RequestProvider(reqManager, handler);
 
     QTimer* reqTimer = new QTimer();
-    reqTimer->setInterval(100);
+    reqTimer->setInterval(1000);
     reqTimer->setSingleShot(false);
     QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
     reqTimer->start();
