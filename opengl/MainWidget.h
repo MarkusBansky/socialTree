@@ -20,6 +20,7 @@ class MainWidget : public QGLWidget, protected QGLFunctions
 public:
     explicit MainWidget(QWidget *parent = 0);
     ~MainWidget();
+    void updateScene();
 
 protected:
     void mousePressEvent(QMouseEvent *e);
@@ -35,7 +36,6 @@ protected:
     void initShaders();
     void initTextures();
 
-    void updateScene();
     void updateProjection();
 private:
     QBasicTimer timer;
