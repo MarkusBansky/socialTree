@@ -28,3 +28,4 @@
 # QT build directories
 build*/
 */android/
+core/scenegraph.h.autosave

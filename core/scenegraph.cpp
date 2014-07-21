@@ -29,4 +29,6 @@ void SceneGraph::SetCoords(node* leaf){
 
 }
 
+void SceneGraph::CheckCollisions(node *leaf){
 
+}
