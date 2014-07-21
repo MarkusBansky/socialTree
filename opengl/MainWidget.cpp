@@ -8,10 +8,7 @@ MainWidget* widget;
 MainWidget::MainWidget(QWidget *parent) :
     QGLWidget(parent)
 {
-    const int TOP_OFFSET = 100;
-    //Init scene rect where scene(0, 0) points to screen (width/2, -TOP_OFFSET)
-    sceneRect_ = QRectF(-width()/2, -TOP_OFFSET, width(), height());
-    scale_ = 1.0;
+    resetCamera();
 }
 
 MainWidget::~MainWidget()
@@ -36,6 +33,10 @@ void MainWidget::mouseReleaseEvent(QMouseEvent *e)
     case Qt::LeftButton:
         isMoving_ = false;
         break;
+    case Qt::MiddleButton:
+        resetCamera();
+        updateProjection();
+        break;
     }
     updateScene();
 }
@@ -53,9 +54,10 @@ void MainWidget::mouseMoveEvent(QMouseEvent *e)
 
 void MainWidget::wheelEvent(QWheelEvent* e)
 {
+    const float SCALING_SPEED = 1.001;
     float coef = pow(SCALING_SPEED, e->delta());
 
-    //Getting scene coordinates of current screen ceneter
+    //Getting scene coordinates of current screen center
     QPointF center = QPointF(sceneRect_.left() + e->x()/scale_, sceneRect_.top() + e->y()/scale_);
 
     scale_ *= coef;
@@ -123,6 +125,14 @@ void MainWidget::resizeGL(int w, int h)
     sceneRect_.setSize(QSizeF(w/scale_, h/scale_));
 
     updateProjection();
+}
+
+void MainWidget::resetCamera()
+{
+    const int TOP_OFFSET = 100;
+    //Init camera rect where scene(0, 0) points to screen (width/2, -TOP_OFFSET)
+    sceneRect_ = QRectF(-width()/2, -TOP_OFFSET, width(), height());
+    scale_ = 1.0;
 }
 
 void MainWidget::updateProjection()

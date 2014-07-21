@@ -31,6 +31,7 @@ protected:
 
     void initializeGL();
     void resizeGL(int w, int h);
+    void resetCamera();
     void paintGL();
 
     void initShaders();
@@ -51,10 +52,6 @@ private:
     float scale_;
 
     QMatrix4x4 projection;
-
-    const int DEFAULT_WINDOW_WIDTH = 640;
-    const int DEFAULT_WINDOW_HEIGHT = 480;
-    const float SCALING_SPEED = 1.001;
 };
 
 extern MainWidget* widget;
