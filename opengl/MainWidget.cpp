@@ -34,16 +34,6 @@ void MainWidget::mouseReleaseEvent(QMouseEvent *e)
     case Qt::LeftButton:
         isMoving_ = false;
         break;
-    default:
-//        SceneGraph::lines.push_back({{0, }, {qrand()%800 - 400, qrand()%600 - 300}});
-        SceneGraph::lines.push_back({{0, 0}, {0, 10000}});
-        SceneGraph::lines.push_back({{0, 0}, {10000, 0}});
-        SceneGraph::rectangles.push_back({{0, 0}, 60});
-        SceneGraph::rectangles.push_back({{0, 100}, 60});
-        SceneGraph::rectangles.push_back({{100, 100}, 60});
-//        SceneGraph::lines.push_back({{qrand()%800 - 400, qrand()%600 - 300}, {qrand()%800 - 400, qrand()%600 - 300}});
-//        SceneGraph::rectangles.push_back({{qrand()%800 - 400, qrand()%600 - 300}, qrand()%50 + 50});
-        break;
     }
     updateScene();
 }
