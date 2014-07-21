@@ -46,10 +46,9 @@ private:
 
     bool isMoving_;
     QPoint lastPos_;
-    QPointF centerOffset_;
 
+    QRectF sceneRect_;
     float scale_;
-
 
     QMatrix4x4 projection;
 

@@ -8,7 +8,9 @@ MainWidget* widget;
 MainWidget::MainWidget(QWidget *parent) :
     QGLWidget(parent)
 {
-    centerOffset_ = QPointF(0.0, 0.0);
+    const int TOP_OFFSET = 100;
+    //Init scene rect where scene(0, 0) points to screen (width/2, -TOP_OFFSET)
+    sceneRect_ = QRectF(-width()/2, -TOP_OFFSET, width(), height());
     scale_ = 1.0;
 }
 
@@ -43,7 +45,7 @@ void MainWidget::mouseMoveEvent(QMouseEvent *e)
     if (isMoving_)
     {
         QPointF delta = e->pos() - lastPos_;
-        centerOffset_ += delta;
+        sceneRect_.translate(-(delta/scale_));
         lastPos_ = e->pos();
         updateProjection();
     }
@@ -52,7 +54,18 @@ void MainWidget::mouseMoveEvent(QMouseEvent *e)
 void MainWidget::wheelEvent(QWheelEvent* e)
 {
     float coef = pow(SCALING_SPEED, e->delta());
+
+    //Getting scene coordinates of current screen ceneter
+    QPointF center = QPointF(sceneRect_.left() + e->x()/scale_, sceneRect_.top() + e->y()/scale_);
+
     scale_ *= coef;
+
+    //Recalculating rect
+    sceneRect_.setLeft(center.x() - e->x()/scale_);
+    sceneRect_.setRight(center.x() + (width() - e->x())/scale_);
+    sceneRect_.setTop(center.y() - e->y()/scale_);
+    sceneRect_.setBottom(center.y() + (height() - e->y())/scale_);
+
     updateProjection();
 }
 
@@ -72,9 +85,11 @@ void MainWidget::initializeGL()
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
+    //Enabling transparency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    //Enabling antialiasing for lines
     glEnable(GL_LINE_SMOOTH);
     glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 
@@ -104,17 +119,18 @@ void MainWidget::resizeGL(int w, int h)
     // Set OpenGL viewport to cover whole widget
     glViewport(0, 0, w, h);
 
+    //Scale rect
+    sceneRect_.setSize(QSizeF(w/scale_, h/scale_));
+
     updateProjection();
 }
 
 void MainWidget::updateProjection()
 {
-    const int TOP_OFFSET = 100;
     // Reset projection
     projection.setToIdentity();
-    // Set orthographic projection, where scene (0, 0) is at window (window.width/2, TOP_OFFSET)
-    projection.ortho(-DEFAULT_WINDOW_WIDTH/2, DEFAULT_WINDOW_WIDTH/2,
-                     -TOP_OFFSET + DEFAULT_WINDOW_HEIGHT, -TOP_OFFSET, 0.1, 1000);
+    // Set orthographic projection
+    projection.ortho(sceneRect_.left(), sceneRect_.right(), sceneRect_.bottom(), sceneRect_.top(), 0.1, 10000);
 }
 
 void MainWidget::paintGL()
@@ -124,8 +140,7 @@ void MainWidget::paintGL()
 
     // Calculate model view matrix
     QMatrix4x4 matrix;
-    matrix.translate(centerOffset_.x(), centerOffset_.y(), -100.0);
-    matrix.scale(scale_);
+    matrix.translate(0.0, 0.0, -1000.0);
 
     // Set modelview-projection matrix
     program.setUniformValue("mvp_matrix", projection * matrix);
@@ -155,17 +170,17 @@ void MainWidget::updateScene()
         for (size_t i = 0; i < SceneGraph::rectangles.size(); i++)
         {
             render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //left top
             render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //right top
             render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //left bottom
             render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //right top
             render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //left bottom
             render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0);
+                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //right bottom
         }
     render.drawStop();
 
