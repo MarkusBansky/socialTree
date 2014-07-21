@@ -16,9 +16,11 @@ struct SceneRectangle
 class SceneGraph
 {
 public:
-    static void Magica(tree* Tree);
+    static void Generator(tree* Tree);
     static std::vector<Line2F> lines;
     static std::vector<SceneRectangle> rectangles;
+private:
+    static void SetCoords(node* leaf);
 };
 
 #endif // SCENEGRAPH_H

@@ -31,7 +31,7 @@ void coreHandler::processRequest(sRequest r){
         break;
     }
 
-    SceneGraph::Magica(&Tree);
+    SceneGraph::Generator(&Tree);
     //ссилка на опенджіел
 }
 
