@@ -53,8 +53,8 @@ private:
 
     QMatrix4x4 projection;
 
-    const int DEFAULT_WINDOW_WIDTH = 800;
-    const int DEFAULT_WINDOW_HEIGHT = 600;
+    const int DEFAULT_WINDOW_WIDTH = 640;
+    const int DEFAULT_WINDOW_HEIGHT = 480;
     const float SCALING_SPEED = 1.001;
 };
 
