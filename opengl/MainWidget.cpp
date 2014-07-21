@@ -37,6 +37,8 @@ void MainWidget::mouseReleaseEvent(QMouseEvent *e)
         resetCamera();
         updateProjection();
         break;
+    default:
+        break;
     }
     updateScene();
 }
