@@ -6,8 +6,8 @@ precision mediump float;
 
 uniform mat4 mvp_matrix;
 
-in vec4 position;
-in vec4 color;
+attribute vec4 position;
+attribute vec4 color;
 
 varying vec4 fragment_color;
 

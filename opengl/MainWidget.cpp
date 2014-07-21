@@ -93,9 +93,11 @@ void MainWidget::initializeGL()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+#ifdef Q_OS_WIN32
     //Enabling antialiasing for lines
     glEnable(GL_LINE_SMOOTH);
     glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+#endif
 
     //Start redraw timer
     timer.start(12, this);
