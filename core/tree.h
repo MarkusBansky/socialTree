@@ -16,13 +16,13 @@ public:
         void deleteNode(QString name);
         node *search(QString name);
         void destroy_tree();
+        node *root;
 
     private:
         void destroy_tree(node *leaf);
         node* searchParent(QString name, node *leaf);
         node *search(QString name, node *leaf);
 
-        node *root;
 };
 
 #endif // TREE_H
