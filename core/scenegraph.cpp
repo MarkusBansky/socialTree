@@ -34,12 +34,12 @@ void SceneGraph::CheckCollisions(node *leaf){
     int myX = leaf->x;
 
     int offset = myX - parentX;
-    if(offset!=0 && leaf->name != "root")
+    if(offset!=0 && leaf->parent != NULL)
         SceneGraph::SetOffset(leaf->parent, offset);
 }
 
 void SceneGraph::SetOffset(node *leaf, int offset){
-    if(leaf->name != "root")
+    if(leaf->parent != NULL)
         leaf->x = leaf->x - offset;
     for(int i = 0; i<leaf->nodes.size(); i++){
         SetOffset(leaf->nodes[i], offset);
