@@ -10,3 +10,4 @@
 10 ADD name10 name4
 11 ADD name11 name4
 12 ADD name12 name4
+13 DELETE name12

@@ -4,6 +4,7 @@
 #include "scenegraph.h"
 #include "../opengl/MainWidget.h"
 #define ull unsigned long long int
+#undef DELETE
 
 QString gName;
 QString gParentName;
