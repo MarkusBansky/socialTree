@@ -25,6 +25,7 @@ protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent* e);
     void timerEvent(QTimerEvent *e);
 
     void initializeGL();
@@ -47,11 +48,14 @@ private:
     QPoint lastPos_;
     QPointF centerOffset_;
 
+    float scale_;
+
 
     QMatrix4x4 projection;
 
     const int DEFAULT_WINDOW_WIDTH = 800;
     const int DEFAULT_WINDOW_HEIGHT = 600;
+    const float SCALING_SPEED = 1.001;
 };
 
 #endif // MAINWIDGET_H

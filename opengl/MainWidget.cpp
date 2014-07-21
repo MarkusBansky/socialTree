@@ -7,6 +7,7 @@ MainWidget::MainWidget(QWidget *parent) :
     QGLWidget(parent)
 {
     centerOffset_ = QPointF(0.0, 0.0);
+    scale_ = 1.0;
 }
 
 MainWidget::~MainWidget()
@@ -49,11 +50,18 @@ void MainWidget::mouseMoveEvent(QMouseEvent *e)
 {
     if (isMoving_)
     {
-        QPointF delta = lastPos_ - e->pos();
+        QPointF delta = (lastPos_ - e->pos())/scale_;
         centerOffset_ += delta;
         lastPos_ = e->pos();
         updateProjection();
     }
+}
+
+void MainWidget::wheelEvent(QWheelEvent* e)
+{
+    float coef = pow(SCALING_SPEED, e->delta());
+    scale_ *= coef;
+    updateProjection();
 }
 
 void MainWidget::timerEvent(QTimerEvent *)
@@ -107,10 +115,10 @@ void MainWidget::updateProjection()
     // Reset projection
     projection.setToIdentity();
     // Set orthographic projection, where scene (0, 0) is at window (window.width/2, TOP_OFFSET)
-    projection.ortho(-DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x(),
-                      DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x(),
-                     -TOP_OFFSET + DEFAULT_WINDOW_HEIGHT + centerOffset_.y(),
-                     -TOP_OFFSET + centerOffset_.y(), 0.1, 1000);
+    projection.ortho((-DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x()) / scale_,
+                      (DEFAULT_WINDOW_WIDTH/2  + centerOffset_.x()) / scale_,
+                     (-TOP_OFFSET + DEFAULT_WINDOW_HEIGHT + centerOffset_.y()) / scale_,
+                     (-TOP_OFFSET + centerOffset_.y()) / scale_, 0.1, 1000);
 }
 
 void MainWidget::paintGL()
