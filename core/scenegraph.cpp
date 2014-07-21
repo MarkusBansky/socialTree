@@ -9,7 +9,7 @@ std::vector<SceneRectangle> SceneGraph::rectangles;
 void SceneGraph::Generator(tree* Tree){
     SceneGraph::lines.clear();
     SceneGraph::rectangles.clear();
-    SetCoords(Tree->root);
+    SceneGraph::SetCoords(Tree->root);
 }
 
 void SceneGraph::SetCoords(node* leaf){
@@ -25,10 +25,23 @@ void SceneGraph::SetCoords(node* leaf){
     for(int i =0; i<childCount; i++){
         leaf->nodes[i]->x = lMargin + SQUARE_W/2 + (SQUARE_W+PADDING_X)*i;
         SetCoords(leaf->nodes[i]);
+        CheckCollisions(leaf->nodes[i]);
     }
-
 }
 
 void SceneGraph::CheckCollisions(node *leaf){
+    int parentX = leaf->parent->x;
+    int myX = leaf->x;
 
+    int offset = myX - parentX;
+    if(offset!=0 && leaf->name != "root")
+        SceneGraph::SetOffset(leaf->parent, offset);
+}
+
+void SceneGraph::SetOffset(node *leaf, int offset){
+    if(leaf->name != "root")
+        leaf->x = leaf->x - offset;
+    for(int i = 0; i<leaf->nodes.size(); i++){
+        SetOffset(leaf->nodes[i], offset);
+    }
 }

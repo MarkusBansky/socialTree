@@ -25,7 +25,8 @@ public:
     static std::vector<Line2F> lines;
     static std::vector<SceneRectangle> rectangles;
 private:
-    static void CheckCollision(node* leaf);
+    static void CheckCollisions(node* leaf);
+    static void SetOffset(node* leaf, int offset);
     static void SetCoords(node* leaf);
 };
 
