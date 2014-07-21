@@ -7,6 +7,11 @@
 #include "corehandler.h"
 #include "tree.h"
 
+#define SQUARE_W 60
+#define SQUARE_H 60
+#define PADDING_X 20
+#define PADDING_Y 100
+
 struct SceneRectangle
 {
     Vertex2F center;
