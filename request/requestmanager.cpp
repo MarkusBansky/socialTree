@@ -13,7 +13,7 @@ RequestManager* RequestManager::getRequestManagerInstance() {
 
 RequestManager::RequestManager() {
     requestIndex = 0;
-    FILEPATH = "requests.dat";
+    FILEPATH = "C:\\Users\\Markiyan.Benovskyy\\Documents\\GitHub\\socialTree\\requests.dat";
     ReadDb();
 }
 
