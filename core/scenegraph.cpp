@@ -39,8 +39,8 @@ void SceneGraph::setCoords(node* leaf)
         processedWidth += childWidth;
         child->x = (leftestChildCenter + rightestChildCenter) / 2.0;
         setCoords(child);
-        lines.push_back({{leaf->x,  leaf->y},
-                        {child->x, child->y}});
+        lines.push_back({{leaf->x,  leaf->y + SQUARE_SIZE/2},
+                        {child->x, child->y - SQUARE_SIZE/2}});
     }
 }
 
