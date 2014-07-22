@@ -7,12 +7,12 @@
 #include "corehandler.h"
 #include "tree.h"
 
-const float SQUARE_SIZE = 60;
+const float NODE_SIZE = 60;
 
 const float PADDING_X = 20;
 const float PADDING_Y = 100;
 
-struct SceneRectangle
+struct SceneNode
 {
     Vertex2F center;
     float size;
@@ -25,8 +25,8 @@ public:
     static int FullWidth;
 
     static void Generator(tree* Tree);
-    static std::vector<Line2F> lines;
-    static std::vector<SceneRectangle> rectangles;
+    static std::vector<Line2F> sceneLines;
+    static std::vector<SceneNode> sceneNodes;
 private:
     static void setCoords(node* leaf);
     static size_t getMaxWidth(node* leaf);

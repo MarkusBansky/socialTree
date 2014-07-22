@@ -1,6 +1,6 @@
 #include "MainWidget.h"
 
-#include <math.h>
+#include <cmath>
 #include <QMouseEvent>
 
 MainWidget* widget;
@@ -191,35 +191,42 @@ void MainWidget::updateScene()
     //Draw lines
     render.setColor(0.0, 0.0, 0.0, 0.4);
     render.drawStart(GL_LINES);
-        for (size_t i = 0; i < SceneGraph::lines.size(); i++)
+        for (size_t i = 0; i < SceneGraph::sceneLines.size(); i++)
         {
-            render.vertexAdd(SceneGraph::lines[i].start.x, SceneGraph::lines[i].start.y, 1.0);
-            render.vertexAdd(SceneGraph::lines[i].end.x, SceneGraph::lines[i].end.y, 1.0);
+            render.vertexAdd(SceneGraph::sceneLines[i].start.x, SceneGraph::sceneLines[i].start.y, 1.0);
+            render.vertexAdd(SceneGraph::sceneLines[i].end.x, SceneGraph::sceneLines[i].end.y, 1.0);
         }
     render.drawStop();
 
-    //Draw rectangles
+    //Draw nodes
 //    render.setColor(0.3137254901960784, 0.5372549019607843, 0.7647058823529412, 1.0);
     render.setColor(1.0, 0.0, 0.0, 1.0);
     render.drawStart(GL_TRIANGLES);
-        for (size_t i = 0; i < SceneGraph::rectangles.size(); i++)
+        for (size_t i = 0; i < SceneGraph::sceneNodes.size(); i++)
         {
-            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //left top
-            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //right top
-            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //left bottom
-            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y - SceneGraph::rectangles[i].size/2, 2.0); //right top
-            render.vertexAdd(SceneGraph::rectangles[i].center.x - SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //left bottom
-            render.vertexAdd(SceneGraph::rectangles[i].center.x + SceneGraph::rectangles[i].size/2,
-                             SceneGraph::rectangles[i].center.y + SceneGraph::rectangles[i].size/2, 2.0); //right bottom
+            const int CIRCLE_DETALIZATION = 100;
+            for (int j = 0; j < CIRCLE_DETALIZATION; j++)
+            {
+                render.vertexAdd(SceneGraph::sceneNodes[i].center.x, SceneGraph::sceneNodes[i].center.y, 2.0);
+                Vertex2F tmp;
+                tmp = getCirclePoint(j, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2);
+                render.vertexAdd(tmp.x, tmp.y, 2.0);
+                tmp = getCirclePoint(j + 1, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2);
+                render.vertexAdd(tmp.x, tmp.y, 2.0);
+            }
         }
     render.drawStop();
 
     //Prepare data
     render.genVBOs();
     render.registerVBOs();
+}
+
+Vertex2F& MainWidget::getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius)
+{
+    Vertex2F nextPoint;
+    float angle = 2 * M_PI / ((float)detalization) * ((float)id);
+    nextPoint.x = circleCenter.x + std::cos(angle) * radius;
+    nextPoint.y = circleCenter.y + std::sin(angle) * radius;
+    return nextPoint;
 }

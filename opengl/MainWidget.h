@@ -11,6 +11,7 @@
 #include <QtOpenGL/QGLShaderProgram>
 #include "VBORender.h"
 #include "../core/scenegraph.h"
+#include "RenderTypes.h"
 
 
 class MainWidget : public QGLWidget, protected QGLFunctions
@@ -52,6 +53,8 @@ private:
     float scale_;
 
     QMatrix4x4 projection;
+
+    Vertex2F& getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius);
 };
 
 extern MainWidget* widget;
