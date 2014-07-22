@@ -73,14 +73,16 @@ void VBORender::genVBOs()
 {
     if (modeBuffer_.empty()) return;
     size_t start = 0;
-    uint ind = modeBuffer_[0];
+    uint modeInd = modeBuffer_[0];
+    uint textureInd = textureIndBuffer_[0];
     for (size_t i = 1; i < modeBuffer_.size(); i++)
     {
-        if (modeBuffer_[i] != ind)
+        if ((modeBuffer_[i] != modeInd) || (textureIndBuffer_[i] != textureInd))
         {
             genVBO(start, i - 1);
             start = i;
-            ind = modeBuffer_[i];
+            modeInd = modeBuffer_[i];
+            textureInd = textureIndBuffer_[i];
         }
     }
     genVBO(start, modeBuffer_.size() - 1);
