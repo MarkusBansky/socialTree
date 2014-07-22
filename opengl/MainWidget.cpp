@@ -110,7 +110,7 @@ uint MainWidget::loadTexture(const QImage& image)
     uint id = bindTexture(image);
 
     // Set nearest filtering mode for texture minification
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
     // Set bilinear filtering mode for texture magnification
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
