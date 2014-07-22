@@ -35,7 +35,7 @@ protected:
     void paintGL();
 
     void initShaders();
-    void initTextures();
+    uint loadTexture(const QImage& image);
 
     void updateProjection();
 private:

@@ -115,14 +115,10 @@ void VBORender::drawVBOs(QGLShaderProgram* program)
                cSize = sizeof(Color)*subBuffers_[i].count,
                tSize = sizeof(TextureCoordinates)*subBuffers_[i].count;
 
-        if (subBuffers_[i].textureIndex)
-        {
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, subBuffers_[i].textureIndex);
-        } else
-        {
-            glDisable(GL_TEXTURE_2D);
-        }
+        glBindTexture(GL_TEXTURE_2D, subBuffers_[i].textureIndex);
+
+        program->setUniformValue("hasTexture", subBuffers_[i].textureIndex > 0);
+        program->setUniformValue("textureSample", 0);
 
         glBindBuffer(GL_ARRAY_BUFFER, subBuffers_[i].id);
 
@@ -134,26 +130,25 @@ void VBORender::drawVBOs(QGLShaderProgram* program)
         program->enableAttributeArray(colorLocation);
         glVertexAttribPointer(colorLocation, 4, GL_FLOAT, GL_FALSE, 0, (const void *)vSize);
 
-/*        int texcoordLocation = program->attributeLocation("a_texcoord");
+        int texcoordLocation = program->attributeLocation("texcoord");
         program->enableAttributeArray(texcoordLocation);
         glVertexAttribPointer(texcoordLocation, 2, GL_FLOAT, GL_FALSE, 0, (const void *)(vSize + cSize));
-*/
+
         glDrawArrays(subBuffers_[i].mode, 0, subBuffers_[i].count);
 
-//        program->disableAttributeArray(texcoordLocation);
+        program->disableAttributeArray(texcoordLocation);
         program->disableAttributeArray(colorLocation);
         program->disableAttributeArray(vertexLocation);
     }
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void VBORender::clearVBOs()
 {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     for (size_t i = 0; i < subBuffers_.size(); i++)
-    {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
         glDeleteBuffers(1, &(subBuffers_[i].id));
-    }
     subBuffers_.clear();
 }
 

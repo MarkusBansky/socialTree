@@ -86,7 +86,7 @@ void MainWidget::initializeGL()
     initShaders();
 
     qglClearColor(Qt::white);
-    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
     glLineWidth(3);
@@ -103,6 +103,23 @@ void MainWidget::initializeGL()
 
     //Start redraw timer
     timer.start(12, this);
+}
+
+uint MainWidget::loadTexture(const QImage& image)
+{
+    uint id = bindTexture(image);
+
+    // Set nearest filtering mode for texture minification
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    // Set bilinear filtering mode for texture magnification
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Wrap texture coordinates by repeating
+    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    return id;
 }
 
 void MainWidget::initShaders()
@@ -170,6 +187,7 @@ void MainWidget::updateScene()
     render.clearVBOs();
     render.clearBuffers();
 
+    render.textureDisable();
     //Draw lines
     render.setColor(0.0, 0.0, 0.0, 0.4);
     render.drawStart(GL_LINES);
