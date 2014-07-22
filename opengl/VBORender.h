@@ -26,6 +26,7 @@ class VBORender : protected QGLFunctions
         virtual ~VBORender();
 
         void vertexAdd(float x, float y, float z);
+        void vertexAdd(Vertex2F& pos, float z);
 
         void drawStart(uint mode);
         void drawStop();
@@ -37,6 +38,7 @@ class VBORender : protected QGLFunctions
         void setColor(float r, float g, float b, float a);
 
         void setTextureCoordinates(float s, float t);
+        void setTextureCoordinates(Vertex2F& pos);
 
         void genVBO(size_t from, size_t to);
         void genVBOs();

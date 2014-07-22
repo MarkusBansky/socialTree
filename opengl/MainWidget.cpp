@@ -199,20 +199,36 @@ void MainWidget::updateScene()
     render.drawStop();
 
     //Draw nodes
-//    render.setColor(0.3137254901960784, 0.5372549019607843, 0.7647058823529412, 1.0);
-    render.setColor(1.0, 0.0, 0.0, 1.0);
+    render.textureDisable();
     render.drawStart(GL_TRIANGLES);
         for (size_t i = 0; i < SceneGraph::sceneNodes.size(); i++)
         {
             const int CIRCLE_DETALIZATION = 100;
+            render.setColor(0.31, 0.54, 0.76, 1.0);
             for (int j = 0; j < CIRCLE_DETALIZATION; j++)
             {
                 render.vertexAdd(SceneGraph::sceneNodes[i].center.x, SceneGraph::sceneNodes[i].center.y, 2.0);
-                Vertex2F tmp;
-                tmp = getCirclePoint(j, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2);
-                render.vertexAdd(tmp.x, tmp.y, 2.0);
-                tmp = getCirclePoint(j + 1, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2);
-                render.vertexAdd(tmp.x, tmp.y, 2.0);
+                render.vertexAdd(getCirclePoint(j, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2), 2.0);
+                render.vertexAdd(getCirclePoint(j + 1, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2), 2.0);
+            }
+            if (SceneGraph::sceneNodes[i].texture)
+            {
+                render.textureEnable();
+                render.textureSelect(SceneGraph::sceneNodes[i].texture);
+                render.setColor(1.0, 1.0, 1.0, 1.0);
+                Vertex2F textureCenter = {0.5, 0.5};
+                for (int j = 0; j < CIRCLE_DETALIZATION; j++)
+                {
+                    render.setTextureCoordinates(0.5, 0.5);
+                    render.vertexAdd(SceneGraph::sceneNodes[i].center.x, SceneGraph::sceneNodes[i].center.y, 2.0);
+
+                    render.setTextureCoordinates(getCirclePoint(CIRCLE_DETALIZATION - j, CIRCLE_DETALIZATION, textureCenter, 0.5));
+                    render.vertexAdd(getCirclePoint(j, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2 - 3), 3.0);
+
+                    render.setTextureCoordinates(getCirclePoint(CIRCLE_DETALIZATION - j - 1, CIRCLE_DETALIZATION, textureCenter, 0.5));
+                    render.vertexAdd(getCirclePoint(j + 1, CIRCLE_DETALIZATION, SceneGraph::sceneNodes[i].center, SceneGraph::sceneNodes[i].size/2 - 3), 3.0);
+                }
+                render.textureDisable();
             }
         }
     render.drawStop();

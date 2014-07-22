@@ -15,6 +15,7 @@ const float PADDING_Y = 100;
 struct SceneNode
 {
     Vertex2F center;
+    uint texture;
     float size;
 };
 

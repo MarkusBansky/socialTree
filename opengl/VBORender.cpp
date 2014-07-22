@@ -25,6 +25,11 @@ void VBORender::vertexAdd(float x, float y, float z)
     textureCoordBuffer_.push_back(currentTextureCoord_);
 }
 
+void VBORender::vertexAdd(Vertex2F& pos, float z)
+{
+    vertexAdd(pos.x, pos.y, z);
+}
+
 void VBORender::drawStart(uint mode)
 {
     currentMode_ = mode;
@@ -57,6 +62,11 @@ void VBORender::setColor(float r, float g, float b, float a)
 void VBORender::setTextureCoordinates(float s, float t)
 {
     currentTextureCoord_ = {s, t};
+}
+
+void VBORender::setTextureCoordinates(Vertex2F& pos)
+{
+    setTextureCoordinates(pos.x, pos.y);
 }
 
 void VBORender::genVBO(size_t from, size_t to)

@@ -6,6 +6,7 @@
 struct node
 {
   QString name;
+  uint texture;
   std::vector <node*> nodes;
   node* parent;
   float x, y;
@@ -16,6 +17,7 @@ struct node
       y = 0;
       name = _name;
       parent = _parent;
+      texture = 0;
   }
 };
 
