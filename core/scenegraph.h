@@ -7,10 +7,10 @@
 #include "corehandler.h"
 #include "tree.h"
 
-#define SQUARE_W 60
-#define SQUARE_H 60
-#define PADDING_X 20
-#define PADDING_Y 100
+const float SQUARE_SIZE = 60;
+
+const float PADDING_X = 20;
+const float PADDING_Y = 100;
 
 struct SceneRectangle
 {
@@ -28,7 +28,8 @@ public:
     static std::vector<Line2F> lines;
     static std::vector<SceneRectangle> rectangles;
 private:
-    static void SetCoords(node* leaf);
+    static void setCoords(node* leaf);
+    static size_t getMaxWidth(node* leaf);
 };
 
 #endif // SCENEGRAPH_H
