@@ -89,6 +89,8 @@ void MainWidget::initializeGL()
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
+    glLineWidth(3);
+
     //Enabling transparency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -169,7 +171,7 @@ void MainWidget::updateScene()
     render.clearBuffers();
 
     //Draw lines
-    render.setColor(0.0, 0.0, 1.0, 1.0);
+    render.setColor(0.0, 0.0, 0.0, 0.4);
     render.drawStart(GL_LINES);
         for (size_t i = 0; i < SceneGraph::lines.size(); i++)
         {
@@ -179,6 +181,7 @@ void MainWidget::updateScene()
     render.drawStop();
 
     //Draw rectangles
+//    render.setColor(0.3137254901960784, 0.5372549019607843, 0.7647058823529412, 1.0);
     render.setColor(1.0, 0.0, 0.0, 1.0);
     render.drawStart(GL_TRIANGLES);
         for (size_t i = 0; i < SceneGraph::rectangles.size(); i++)
