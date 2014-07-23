@@ -10,7 +10,8 @@ HEADERS += request/request.h \
     request/requestmanager.h \
     request/requestprovider.h \
     core/scenegraph.h \
-    opengl/AnimationManager.h
+    opengl/AnimationManager.h \
+    server.h
 SOURCES += main.cpp \
     core/tree.cpp \
     core/coreHandler.cpp \
@@ -19,7 +20,8 @@ SOURCES += main.cpp \
     request/requestmanager.cpp \
     request/requestprovider.cpp \
     core/scenegraph.cpp \
-    opengl/AnimationManager.cpp
+    opengl/AnimationManager.cpp \
+    server.cpp
 RESOURCES += opengl/shaders.qrc
 
 target.path = $$[QT_INSTALL_EXAMPLES]/quick/scenegraph/openglunderqml

@@ -10,6 +10,7 @@
 #include "request/requestprovider.h"
 #include "core/corehandler.h"
 #include "opengl/AnimationManager.h"
+#include "server.h"
 
 #include <iostream>
 
@@ -31,11 +32,14 @@ int main(int argc, char *argv[])
     coreHandler* handler = new coreHandler();
     RequestProvider* reqProvider = new RequestProvider(reqManager, handler);
 
-    QTimer* reqTimer = new QTimer();
-    reqTimer->setInterval(1000);
-    reqTimer->setSingleShot(false);
-    QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
-    reqTimer->start();
+    //QTimer* reqTimer = new QTimer();
+    //reqTimer->setInterval(1000);
+    //reqTimer->setSingleShot(false);
+    //QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
+    //reqTimer->start();
+
+    Server HostServer;
+
     animationManager = new AnimationManager(handler);
     return app.exec();
 }
