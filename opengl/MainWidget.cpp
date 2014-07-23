@@ -203,7 +203,7 @@ void MainWidget::updateScene()
     render.drawStart(GL_TRIANGLES);
         for (size_t i = 0; i < SceneGraph::sceneNodes.size(); i++)
         {
-            const int CIRCLE_DETALIZATION = 100;
+            const int CIRCLE_DETALIZATION = 4;
             render.setColor(0.31, 0.54, 0.76, 1.0);
             for (int j = 0; j < CIRCLE_DETALIZATION; j++)
             {
