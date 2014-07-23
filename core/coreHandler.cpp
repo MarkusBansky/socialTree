@@ -14,8 +14,8 @@ uint image;
 
 tree Tree;
 
-tree coreHandler::getTree(){
-    return Tree;
+tree* coreHandler::getTree(){
+    return &Tree;
 }
 
 void coreHandler::processRequest(sRequest r){

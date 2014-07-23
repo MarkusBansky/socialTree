@@ -8,7 +8,7 @@ class coreHandler
 {
 public:
     void processRequest(sRequest r);
-    tree getTree();
+    tree* getTree();
 private:
     QString gName;
     QString gParentName;
