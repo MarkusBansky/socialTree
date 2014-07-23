@@ -17,6 +17,7 @@ struct sRequest {
     eCommand cmd;
     QString name;
     QString parentName;
+    uint id;
 
     sRequest(ull _timestamp,
              eCommand _cmd,

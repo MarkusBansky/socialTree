@@ -1,10 +1,10 @@
-1 ADD root NULL
-2 ADD name2 root
-3 ADD name3 root
-4 ADD name4 root
-5 ADD name5 name2
-6 ADD name6 name2
-7 ADD name7 name2
-5 ADD name5 name3
-6 ADD name6 name4
-7 ADD name7 name4
+1 ADD root NULL png.png
+2 ADD name2 root png.png
+3 ADD name3 root png.png
+4 ADD name4 root png.png
+5 ADD name5 name2 png.png
+6 ADD name6 name2 png.png
+7 ADD name7 name2 png.png
+5 ADD name5 name3 png.png
+6 ADD name6 name4 png.png
+7 ADD name7 name4 png.png

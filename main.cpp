@@ -18,6 +18,14 @@ int main(int argc, char *argv[])
     app.setApplicationName("Social Tree");
     app.setApplicationVersion("0.2");
 
+#ifndef QT_NO_OPENGL
+    widget = new MainWidget();
+    widget->show();
+#else
+    QLabel note("OpenGL Support required");
+    note.show();
+#endif
+
     RequestManager* reqManager = RequestManager::getRequestManagerInstance();
     coreHandler* handler = new coreHandler();
     RequestProvider* reqProvider = new RequestProvider(reqManager, handler);
@@ -27,12 +35,5 @@ int main(int argc, char *argv[])
     reqTimer->setSingleShot(false);
     QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
     reqTimer->start();
-    #ifndef QT_NO_OPENGL
-        widget = new MainWidget();
-        widget->show();
-    #else
-        QLabel note("OpenGL Support required");
-        note.show();
-    #endif
     return app.exec();
 }
