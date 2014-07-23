@@ -35,8 +35,6 @@ void coreHandler::processRequest(sRequest r){
     }
 
     SceneGraph::Generator(&Tree);
-    //ссилка на опенджіел
-    widget->updateScene();
 }
 
 void coreHandler::addCase(){

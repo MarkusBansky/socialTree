@@ -9,6 +9,7 @@
 #include "request/requestmanager.h"
 #include "request/requestprovider.h"
 #include "core/corehandler.h"
+#include "opengl/AnimationManager.h"
 
 #include <iostream>
 
@@ -35,5 +36,6 @@ int main(int argc, char *argv[])
     reqTimer->setSingleShot(false);
     QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
     reqTimer->start();
+    animationManager = new AnimationManager(handler);
     return app.exec();
 }
