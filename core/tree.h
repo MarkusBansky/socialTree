@@ -11,8 +11,8 @@ public:
         tree();
         ~tree();
 
-        void insertRoot(QString name);
-        void insert(QString name, node *leaf);
+        void insertRoot(QString name, uint texture);
+        void insert(QString name, node *leaf, uint texture);
         void deleteNode(QString name);
         node *search(QString name);
         void destroy_tree();

@@ -11,13 +11,13 @@ struct node
   node* parent;
   float x, y;
 
-  node(QString _name, node* _parent)
+  node(QString _name, node* _parent, uint _texture)
   {
       x = 0;
       y = 0;
       name = _name;
       parent = _parent;
-      texture = 0;
+      texture = _texture;
   }
 };
 

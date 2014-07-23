@@ -19,9 +19,9 @@ void tree::destroy_tree(node *leaf){
     }
 }
 
-void tree::insert(QString name, node *leaf)
+void tree::insert(QString name, node *leaf, uint texture)
 {
-      (*leaf).nodes.push_back(new node(name, leaf));
+      (*leaf).nodes.push_back(new node(name, leaf, texture));
 }
 
 node *tree::search(QString name, node *leaf)
@@ -50,9 +50,9 @@ node* tree::search(QString name)
   return search(name, root);
 }
 
-void tree::insertRoot(QString name)
+void tree::insertRoot(QString name, uint texture)
 {
-    root=new node(name, NULL);
+    root=new node(name, NULL, texture);
 }
 
 void tree::deleteNode(QString name)

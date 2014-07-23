@@ -10,6 +10,7 @@ QString gName;
 QString gParentName;
 ull gTimestamp;
 eCommand gCmd;
+uint image;
 
 tree Tree;
 
@@ -22,6 +23,7 @@ void coreHandler::processRequest(sRequest r){
     gParentName = r.parentName;
     gTimestamp = r.timestamp;
     gCmd = r.cmd;
+    image = r.id;
 
     switch(gCmd) {
     case ADD:
@@ -40,10 +42,10 @@ void coreHandler::processRequest(sRequest r){
 void coreHandler::addCase(){
     if(this->gParentName != "NULL"){
         node* parent = Tree.search(this->gParentName);
-        Tree.insert(gName, parent);
+        Tree.insert(gName, parent, image);
     }
     else{
-        Tree.insertRoot(gName);
+        Tree.insertRoot(gName, image);
     }
 }
 

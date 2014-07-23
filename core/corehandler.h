@@ -14,6 +14,7 @@ private:
     QString gParentName;
     eCommand gCmd;
     ull gTimestamp;
+    uint image;
 
     tree Tree;
 
