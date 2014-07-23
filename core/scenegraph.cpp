@@ -28,7 +28,7 @@ void SceneGraph::setCoords(node* leaf)
         leaf->y = 0;
     }
     leaf->newState = {leaf->x, leaf->y};
-    //sceneNodes.push_back({{leaf->x, leaf->y}, leaf->texture, NODE_SIZE});
+    sceneNodes.push_back({{leaf->x, leaf->y}, leaf->texture, NODE_SIZE});
     float gapWidth = (NODE_SIZE + PADDING_X) * fullWidth;
     float leftestCenter = leaf->x - gapWidth/2.0;
     size_t processedWidth = 0;
@@ -41,7 +41,7 @@ void SceneGraph::setCoords(node* leaf)
         processedWidth += childWidth;
         child->x = (leftestChildCenter + rightestChildCenter) / 2.0;
         setCoords(child);
-        //sceneLines.push_back({{leaf->x,  leaf->y + NODE_SIZE/2},{child->x, child->y - NODE_SIZE/2}});
+        sceneLines.push_back({{leaf->x,  leaf->y + NODE_SIZE/2},{child->x, child->y - NODE_SIZE/2}});
     }
 }
 
