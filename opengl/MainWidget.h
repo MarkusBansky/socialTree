@@ -22,6 +22,7 @@ public:
     explicit MainWidget(QWidget *parent = 0);
     ~MainWidget();
     void updateScene();
+    uint loadTexture(const QImage& image);
 
 protected:
     void mousePressEvent(QMouseEvent *e);
@@ -36,7 +37,6 @@ protected:
     void paintGL();
 
     void initShaders();
-    uint loadTexture(const QImage& image);
 
     void updateProjection();
 private:
