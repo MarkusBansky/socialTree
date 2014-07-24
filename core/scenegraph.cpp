@@ -15,9 +15,8 @@ void SceneGraph::Generator(tree* Tree){
 
 void SceneGraph::setCoords(node* leaf)
 {
+    if (leaf == NULL) return;
     size_t fullWidth = getMaxWidth(leaf);
-    if (leaf != NULL)
-    {
     if (leaf->parent != NULL)
     {
         leaf->newState.y = leaf->parent->newState.y + PADDING_Y;
@@ -39,7 +38,6 @@ void SceneGraph::setCoords(node* leaf)
         child->newState.x = (leftestChildCenter + rightestChildCenter) / 2.0;
         child->leftTime = 500;
         setCoords(child);
-    }
     }
 }
 

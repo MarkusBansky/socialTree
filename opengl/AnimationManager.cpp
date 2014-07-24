@@ -26,6 +26,13 @@ void AnimationManager::timerEvent(QTimerEvent* event)
             updateScene(core_->getTree()->root);
             widget->updateScene();
         }
+    } else {
+        if (!(SceneGraph::sceneNodes.empty() && SceneGraph::sceneLines.empty()))
+        {
+            SceneGraph::sceneLines.clear();
+            SceneGraph::sceneNodes.clear();
+            widget->updateScene();
+        }
     }
 }
 

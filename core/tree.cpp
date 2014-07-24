@@ -3,7 +3,6 @@
 #include <QVector>
 #include "node.h"
 #include <stdexcept>
-#include <iostream>
 
 tree::tree() {
     root = NULL;
@@ -54,7 +53,6 @@ node* tree::search(QString name)
 
 void tree::insertRoot(QString name, uint texture)
 {
-    bool x = root == NULL;
     if (root == NULL)
         root = new node(name, NULL, texture);
 }
@@ -66,10 +64,15 @@ void tree::deleteNode(QString name)
     {
         node* nodeForDel_Parent = nodeForDel->parent;
         if (nodeForDel_Parent != NULL)
+        {
             for (int i = 0; i < nodeForDel_Parent->nodes.size(); i++)
                 if (nodeForDel == nodeForDel_Parent->nodes[i])
                     nodeForDel_Parent->nodes.erase(
                                 nodeForDel_Parent->nodes.begin() + i);
+        } else
+        {
+            root = NULL;
+        }
         destroy_tree(nodeForDel);
     }
     else
