@@ -1,4 +1,5 @@
 QT += core widgets opengl
+QT += network
 
 HEADERS += request/request.h \
     core/tree.h \

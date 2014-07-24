@@ -5,6 +5,8 @@
 #include "requestmanager.h"
 #include "request.h"
 #include "core/corehandler.h"
+#include <QtNetwork/QTcpServer>
+#include <QMap>
 
 class RequestProvider : public QObject
 {
@@ -17,10 +19,15 @@ private:
     ull time;
     RequestManager* reqManager;
     coreHandler* handler;
+    QTcpServer* tcpServer;
+    QMap<int, QTcpSocket*> SClients;
+    int server_status;
 signals:
 
 public slots:
     void onTimer();
+    void onNewClient();
+    void readClient();
 };
 
 #endif // REQUESTPROVIDER_H

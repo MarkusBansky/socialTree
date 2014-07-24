@@ -1,0 +1,14 @@
+INPUT(
+./debug\main.o
+./debug\tree.o
+./debug\coreHandler.o
+./debug\MainWidget.o
+./debug\VBORender.o
+./debug\requestmanager.o
+./debug\requestprovider.o
+./debug\scenegraph.o
+./debug\AnimationManager.o
+./debug\qrc_shaders.o
+./debug\moc_MainWidget.o
+./debug\moc_requestprovider.o
+);
