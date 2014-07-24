@@ -22,6 +22,7 @@ private:
     QTcpServer* tcpServer;
     QMap<int, QTcpSocket*> SClients;
     int server_status;
+    sRequest ProcessLine(QString line);
 signals:
 
 public slots:
