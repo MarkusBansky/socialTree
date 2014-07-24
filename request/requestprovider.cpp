@@ -40,7 +40,7 @@ void RequestProvider::onNewClient() {
         QTcpSocket* clientSocket=tcpServer->nextPendingConnection();
         int idusersocs=clientSocket->socketDescriptor();
         SClients[idusersocs]=clientSocket;
-        connect(SClients[idusersocs],SIGNAL(readyRead()),this, SLOT(slotReadClient()));
+        connect(SClients[idusersocs],SIGNAL(readyRead()),this, SLOT(readClient()));
     }
 
 }
