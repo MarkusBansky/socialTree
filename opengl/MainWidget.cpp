@@ -107,6 +107,9 @@ void MainWidget::initializeGL()
 
 uint MainWidget::loadTexture(const QImage& image)
 {
+    if (!image.valid(1, 1))
+        return 0;
+
     uint id = bindTexture(image);
 
     // Set nearest filtering mode for texture minification
@@ -245,4 +248,10 @@ Vertex2F& MainWidget::getCirclePoint(int id, int detalization, Vertex2F& circleC
     nextPoint.x = circleCenter.x + std::cos(angle) * radius;
     nextPoint.y = circleCenter.y + std::sin(angle) * radius;
     return nextPoint;
+}
+
+void MainWidget::unloadTexture(uint id)
+{
+    if (id)
+        deleteTexture(id);
 }

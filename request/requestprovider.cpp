@@ -81,13 +81,17 @@ sRequest RequestProvider::ProcessLine(QString line) {
 
     sRequest req = sRequest::getNullRequest();
     if (cmdString == "ADD")
+    {
+        qDebug() << filePath << "\n";
+        QImage image(filePath.trimmed());
+        req.id = widget->loadTexture(image);
         req.cmd = ADD;
-    else
+    } else
+    {
+        req.id = 0;
         req.cmd = DELETE;
+    }
     req.name = nameString;
     req.parentName = parentNameString;
-    qDebug() << filePath << "\n";
-    QImage image(filePath.trimmed());
-    req.id = widget->loadTexture(image);
     return req;
 }

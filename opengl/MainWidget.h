@@ -23,7 +23,7 @@ public:
     ~MainWidget();
     void updateScene();
     uint loadTexture(const QImage& image);
-
+    void unloadTexture(uint id);
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);

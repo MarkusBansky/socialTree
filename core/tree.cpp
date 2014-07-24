@@ -1,5 +1,6 @@
 #include "tree.h"
 #include "../request/request.h"
+#include "../opengl/MainWidget.h"
 #include <QVector>
 #include "node.h"
 #include <stdexcept>
@@ -62,6 +63,7 @@ void tree::deleteNode(QString name)
     node* nodeForDel = search(name);
     if (nodeForDel != NULL)
     {
+        widget->unloadTexture(nodeForDel->texture);
         node* nodeForDel_Parent = nodeForDel->parent;
         if (nodeForDel_Parent != NULL)
         {
