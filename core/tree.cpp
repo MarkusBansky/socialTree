@@ -3,6 +3,7 @@
 #include <QVector>
 #include "node.h"
 #include <stdexcept>
+#include <iostream>
 
 tree::tree() {
     root = NULL;
@@ -53,7 +54,8 @@ node* tree::search(QString name)
 
 void tree::insertRoot(QString name, uint texture)
 {
-    if (root != NULL)
+    bool x = root == NULL;
+    if (root == NULL)
         root = new node(name, NULL, texture);
 }
 
