@@ -61,9 +61,21 @@ void RequestProvider::readClient() {
         qDebug() << temp;
     }
     sRequest req = ProcessLine(temp);
-    handler->processRequest(req);
-    clientSocket->close();
-    SClients.remove(idusersocs);
+    if (temp == "BYE")
+    {
+        os << "DISCONNECTED.";
+        clientSocket->close();
+        SClients.remove(idusersocs);
+        return;
+    }
+    try {
+        handler->processRequest(req);
+        os << "OK. Added.\n";
+    }
+    catch (int a)
+    {
+        os << "Adding failed.\n";
+    }
 }
 
 sRequest RequestProvider::ProcessLine(QString line) {
