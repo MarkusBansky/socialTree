@@ -60,8 +60,8 @@ void RequestProvider::readClient() {
         temp = clientSocket->readAll();
         qDebug() << temp;
     }
-    sRequest req = ProcessLine(temp);
-    if (temp == "BYE")
+
+    if (temp == "BYE\n")
     {
         os << "DISCONNECTED.";
         clientSocket->close();
@@ -69,6 +69,7 @@ void RequestProvider::readClient() {
         return;
     }
     try {
+         sRequest req = ProcessLine(temp);
         handler->processRequest(req);
         os << "OK. Added.\n";
     }
@@ -97,7 +98,8 @@ sRequest RequestProvider::ProcessLine(QString line) {
         req.cmd = DELETE;
     req.name = nameString;
     req.parentName = parentNameString;
-    QImage image(filePath);
+    qDebug() << filePath << "\n";
+    QImage image(filePath.trimmed());
     req.id = widget->loadTexture(image);
     return req;
 }
