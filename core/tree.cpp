@@ -2,6 +2,7 @@
 #include "../request/request.h"
 #include <QVector>
 #include "node.h"
+#include <stdexcept>
 
 tree::tree() {
     root = NULL;
@@ -58,12 +59,20 @@ void tree::insertRoot(QString name, uint texture)
 void tree::deleteNode(QString name)
 {
     node* nodeForDel = search(name);
-    node* nodeForDel_Parent = nodeForDel->parent;
-    for (int i = 0; i < nodeForDel_Parent->nodes.size(); i++)
-        if (nodeForDel == nodeForDel_Parent->nodes[i])
-            nodeForDel_Parent->nodes.erase(
-                        nodeForDel_Parent->nodes.begin() + i);
-    destroy_tree(nodeForDel);
+    if (nodeForDel != NULL)
+    {
+        node* nodeForDel_Parent = nodeForDel->parent;
+        if (nodeForDel_Parent != NULL)
+            for (int i = 0; i < nodeForDel_Parent->nodes.size(); i++)
+                if (nodeForDel == nodeForDel_Parent->nodes[i])
+                    nodeForDel_Parent->nodes.erase(
+                                nodeForDel_Parent->nodes.begin() + i);
+        destroy_tree(nodeForDel);
+    }
+    else
+    {
+        std::invalid_argument("invalid input");
+    }
 }
 
 void tree::destroy_tree()

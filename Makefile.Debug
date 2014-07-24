@@ -359,6 +359,7 @@ debug/moc_requestprovider.cpp: ../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/Qt
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qset.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qcontiguouscache.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qhostaddress.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QMap \
 		request/requestprovider.h
 	C:\Qt\Qt5.3.1\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.3.1/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Yevheniy.Yevsyagov/Documents/socialtree -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include/QtWidgets -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui -IC:/Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore request\requestprovider.h -o debug\moc_requestprovider.cpp
 
@@ -537,6 +538,7 @@ debug/main.o: main.cpp ../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtWidgets/
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qtcpserver.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qabstractsocket.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qhostaddress.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QMap \
 		opengl/AnimationManager.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QTimerEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
@@ -1259,7 +1261,79 @@ debug/requestprovider.o: request/requestprovider.cpp request/requestprovider.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qshareddata.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qset.h \
 		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qcontiguouscache.h \
-		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qhostaddress.h
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qhostaddress.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QMap \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/QTcpSocket \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtNetwork/qtcpsocket.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QDateTime \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qdatetime.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qsharedpointer.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qsharedpointer_impl.h \
+		opengl/MainWidget.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/QGLWidget \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/qgl.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopengl.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qt_windows.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopengles2ext.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopenglext.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtWidgets/qwidget.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qwindowdefs.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qmargins.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpaintdevice.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qrect.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qsize.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpalette.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qcolor.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qrgb.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qbrush.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qmatrix.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpolygon.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qregion.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qline.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qtransform.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpainterpath.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qimage.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpixmap.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qfont.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qfontmetrics.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qfontinfo.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qcursor.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qkeysequence.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qevent.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qurl.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qurlquery.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qvector2d.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qtouchdevice.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpaintengine.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpainter.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qtextoption.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qpen.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/qglcolormap.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/qtopenglglobal.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/QSurfaceFormat \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qsurfaceformat.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/QGLFunctions \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/qglfunctions.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopenglcontext.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QScopedPointer \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopenglversionfunctions.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qopenglfunctions.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/QMatrix4x4 \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qmatrix4x4.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qvector3d.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qvector4d.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qquaternion.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/qgenericmatrix.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/QQuaternion \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtGui/QVector2D \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/QBasicTimer \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtCore/qbasictimer.h \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/QGLShaderProgram \
+		../../../../Qt/Qt5.3.1/5.3/mingw482_32/include/QtOpenGL/qglshaderprogram.h \
+		opengl/VBORender.h \
+		core/scenegraph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\requestprovider.o request\requestprovider.cpp
 
 debug/scenegraph.o: core/scenegraph.cpp core/scenegraph.h \

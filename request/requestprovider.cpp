@@ -4,6 +4,7 @@
 #include <QTcpSocket>
 #include <QDateTime>
 #include "../opengl/MainWidget.h"
+#include <stdexcept>
 #undef DELETE
 
 RequestProvider::RequestProvider(QObject *parent) :
@@ -71,9 +72,9 @@ void RequestProvider::readClient() {
     try {
          sRequest req = ProcessLine(temp);
         handler->processRequest(req);
-        os << "OK. Added.\n";
+        os << "OK\n";
     }
-    catch (int a)
+    catch (...)
     {
         os << "Adding failed.\n";
     }
@@ -81,15 +82,21 @@ void RequestProvider::readClient() {
 
 sRequest RequestProvider::ProcessLine(QString line) {
     QStringList requestList = line.split(" ", QString::SkipEmptyParts);
-    QString timestampString = requestList.at(0);
-    QString cmdString = requestList.at(1);
-    QString nameString = requestList.at(2);
-    QString parentNameString = "";
-    QString filePath = "";
+    QString timestampString, cmdString,
+            nameString, parentNameString,
+            filePath;
+    if (requestList.size() < 3)
+        throw std::invalid_argument("invalid input");
+    timestampString = requestList[0];
+    cmdString = requestList[1];
+    nameString = requestList[2].trimmed();
+    parentNameString = "";
+    filePath = "";
     if (requestList.size() >= 4) {
-        parentNameString = requestList.at(3);
-        filePath = requestList.at(4);
+        parentNameString = requestList[3];
+        filePath = requestList[4];
     }
+
     sRequest req = sRequest::getNullRequest();
     req.timestamp = timestampString.toInt();
     if (cmdString == "ADD")
