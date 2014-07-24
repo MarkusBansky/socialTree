@@ -21,7 +21,6 @@ tree* coreHandler::getTree(){
 void coreHandler::processRequest(sRequest r){
     gName = r.name;
     gParentName = r.parentName;
-    gTimestamp = r.timestamp;
     gCmd = r.cmd;
     image = r.id;
 
@@ -40,7 +39,8 @@ void coreHandler::processRequest(sRequest r){
 void coreHandler::addCase(){
     if(this->gParentName != "NULL"){
         node* parent = Tree.search(this->gParentName);
-        Tree.insert(gName, parent, image);
+        if (parent != NULL)
+            Tree.insert(gName, parent, image);
     }
     else{
         Tree.insertRoot(gName, image);

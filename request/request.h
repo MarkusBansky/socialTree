@@ -13,18 +13,16 @@ enum eCommand {
 };
 
 struct sRequest {
-    ull timestamp;
     eCommand cmd;
     QString name;
     QString parentName;
     uint id;
 
-    sRequest(ull _timestamp,
+    sRequest(
              eCommand _cmd,
              QString _name,
              QString _parentName)
     {
-        timestamp = _timestamp;
         cmd = _cmd;
         name = _name;
         parentName = _parentName;
@@ -32,14 +30,13 @@ struct sRequest {
 
     bool isNull() {
         return
-                this->timestamp == 0 &&
                 this->cmd == ADD &&
                 this->name == "" &&
                 this->parentName == "";
     }
 
     static sRequest getNullRequest() {
-        sRequest req(0, ADD, "", "");
+        sRequest req(ADD, "", "");
         return req;
     }
 };

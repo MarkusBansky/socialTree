@@ -53,7 +53,8 @@ node* tree::search(QString name)
 
 void tree::insertRoot(QString name, uint texture)
 {
-    root=new node(name, NULL, texture);
+    if (root != NULL)
+        root = new node(name, NULL, texture);
 }
 
 void tree::deleteNode(QString name)

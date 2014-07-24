@@ -6,7 +6,6 @@
 #include <opengl/mainwidget.h>
 #endif
 #include "request/request.h"
-#include "request/requestmanager.h"
 #include "request/requestprovider.h"
 #include "core/corehandler.h"
 #include "opengl/AnimationManager.h"
@@ -27,15 +26,8 @@ int main(int argc, char *argv[])
     note.show();
 #endif
 
-    RequestManager* reqManager = RequestManager::getRequestManagerInstance();
     coreHandler* handler = new coreHandler();
-    RequestProvider* reqProvider = new RequestProvider(reqManager, handler);
-
-    QTimer* reqTimer = new QTimer();
-    reqTimer->setInterval(1000);
-    reqTimer->setSingleShot(false);
-    QObject::connect(reqTimer, SIGNAL(timeout()), reqProvider, SLOT(onTimer()));
-    reqTimer->start();
+    RequestProvider* reqProvider = new RequestProvider(handler);
     animationManager = new AnimationManager(handler);
     return app.exec();
 }

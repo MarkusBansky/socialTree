@@ -7,13 +7,7 @@
 #include <stdexcept>
 #undef DELETE
 
-RequestProvider::RequestProvider(QObject *parent) :
-    QObject(parent)
-{
-    time = 0;
-}
-
-RequestProvider::RequestProvider(RequestManager *_reqManager, coreHandler* _corehandler) :
+RequestProvider::RequestProvider(coreHandler* _corehandler) :
     QObject(0)
 {
     tcpServer = new QTcpServer(this);
@@ -24,17 +18,7 @@ RequestProvider::RequestProvider(RequestManager *_reqManager, coreHandler* _core
         server_status=1;
         qDebug() << QString::fromUtf8("Server Started");
     }
-    time = 0;
-    reqManager = _reqManager;
     handler = _corehandler;
-}
-
-void RequestProvider::onTimer() {
-    time++;
-    sRequest req = (*reqManager).getNextRequest(time);
-    if (!req.isNull()) {
-        handler->processRequest(req);
-    }
 }
 
 void RequestProvider::onNewClient() {
@@ -55,14 +39,14 @@ void RequestProvider::readClient() {
     os.setAutoDetectUnicode(true);
     os << "Connection established"
     << QDateTime::currentDateTime().toString() << "\n";
-    QString temp;
+    QString clientMsg;
     while (clientSocket->bytesAvailable())
     {
-        temp = clientSocket->readAll();
-        qDebug() << temp;
+        clientMsg = clientSocket->readAll();
+        qDebug() << clientMsg;
     }
 
-    if (temp == "BYE\n")
+    if (clientMsg == "BYE\n")
     {
         os << "DISCONNECTED.";
         clientSocket->close();
@@ -70,7 +54,7 @@ void RequestProvider::readClient() {
         return;
     }
     try {
-         sRequest req = ProcessLine(temp);
+         sRequest req = ProcessLine(clientMsg);
         handler->processRequest(req);
         os << "OK\n";
     }
@@ -82,23 +66,20 @@ void RequestProvider::readClient() {
 
 sRequest RequestProvider::ProcessLine(QString line) {
     QStringList requestList = line.split(" ", QString::SkipEmptyParts);
-    QString timestampString, cmdString,
-            nameString, parentNameString,
-            filePath;
-    if (requestList.size() < 3)
+    QString cmdString, filePath,
+            nameString, parentNameString;
+    if (requestList.size() < 2)
         throw std::invalid_argument("invalid input");
-    timestampString = requestList[0];
-    cmdString = requestList[1];
-    nameString = requestList[2].trimmed();
+    cmdString = requestList[0];
+    nameString = requestList[1].trimmed();
     parentNameString = "";
     filePath = "";
-    if (requestList.size() >= 4) {
-        parentNameString = requestList[3];
-        filePath = requestList[4];
+    if (requestList.size() >= 3) {
+        parentNameString = requestList[2];
+        filePath = requestList[3];
     }
 
     sRequest req = sRequest::getNullRequest();
-    req.timestamp = timestampString.toInt();
     if (cmdString == "ADD")
         req.cmd = ADD;
     else
