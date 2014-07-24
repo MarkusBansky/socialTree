@@ -17,6 +17,13 @@ struct SceneNode
     Vertex2F center;
     uint texture;
     float size;
+    SceneNode() {}
+    SceneNode(Vertex2F center_, uint texture_, float size_)
+    {
+        center = center_;
+        texture = texture_;
+        size = size_;
+    }
 };
 
 class SceneGraph

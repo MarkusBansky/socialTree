@@ -219,7 +219,7 @@ void MainWidget::updateScene()
                 render.textureEnable();
                 render.textureSelect(SceneGraph::sceneNodes[i].texture);
                 render.setColor(1.0, 1.0, 1.0, 1.0);
-                Vertex2F textureCenter = {0.5, 0.5};
+                Vertex2F textureCenter(0.5, 0.5);
                 for (int j = 0; j < CIRCLE_DETALIZATION; j++)
                 {
                     render.setTextureCoordinates(0.5, 0.5);
@@ -241,7 +241,7 @@ void MainWidget::updateScene()
     render.registerVBOs();
 }
 
-Vertex2F& MainWidget::getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius)
+Vertex2F MainWidget::getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius)
 {
     Vertex2F nextPoint;
     float angle = 2 * M_PI / ((float)detalization) * ((float)id);

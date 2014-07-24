@@ -22,7 +22,7 @@ void SceneGraph::setCoords(node* leaf)
         leaf->newState.y = leaf->parent->newState.y + PADDING_Y;
     } else
     {
-        leaf->newState = {0, 0};
+        leaf->newState = Vertex2F(0, 0);
     }
     leaf->leftTime = 500;
     float gapWidth = (NODE_SIZE + PADDING_X) * fullWidth;

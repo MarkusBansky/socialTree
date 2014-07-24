@@ -54,7 +54,7 @@ private:
 
     QMatrix4x4 projection;
 
-    Vertex2F& getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius);
+    Vertex2F getCirclePoint(int id, int detalization, Vertex2F& circleCenter, float radius);
 };
 
 extern MainWidget* widget;

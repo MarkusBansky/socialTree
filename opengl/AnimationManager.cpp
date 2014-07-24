@@ -56,11 +56,11 @@ bool AnimationManager::animateNode(node* leaf)
 
 void AnimationManager::updateScene(node* leaf)
 {
-    SceneGraph::sceneNodes.push_back({{leaf->oldState.x, leaf->oldState.y}, leaf->texture, NODE_SIZE});
+    SceneGraph::sceneNodes.push_back(SceneNode(Vertex2F(leaf->oldState.x, leaf->oldState.y), leaf->texture, NODE_SIZE));
     for (size_t i = 0; i < leaf->nodes.size(); i++)
     {
         node* child = leaf->nodes[i];
-        SceneGraph::sceneLines.push_back({{leaf->oldState.x, leaf->oldState.y + NODE_SIZE/2} , {child->oldState.x, child->oldState.y - NODE_SIZE/2}});
+        SceneGraph::sceneLines.push_back(Line2F(Vertex2F(leaf->oldState.x, leaf->oldState.y + NODE_SIZE/2) , Vertex2F(child->oldState.x, child->oldState.y - NODE_SIZE/2)));
         updateScene(leaf->nodes[i]);
     }
 }

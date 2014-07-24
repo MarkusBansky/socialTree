@@ -12,21 +12,18 @@ struct node
   node* parent;
   Vertex2F oldState;
   Vertex2F newState;
-  float x, y;
   float leftTime;
 
   node(QString _name, node* _parent, uint _texture)
   {
       leftTime = 0;
-      x = 0;
-      y = 0;
       name = _name;
       parent = _parent;
       texture = _texture;
       if (parent != NULL)
           oldState = parent->oldState;
       else
-          oldState = {0, 0};
+          oldState = Vertex2F(0, 0);
   }
 };
 

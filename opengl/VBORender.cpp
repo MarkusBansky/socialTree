@@ -6,9 +6,9 @@
 VBORender::VBORender()
 {
     currentMode_ = -1;
-    currentColor_ = {1, 1, 1, 1};
+    currentColor_ = Color(1, 1, 1, 1);
     currentTexture_ = 0;
-    currentTextureCoord_ = {0, 0};
+    currentTextureCoord_ = TextureCoordinates(0, 0);
 }
 
 VBORender::~VBORender()
@@ -18,14 +18,14 @@ VBORender::~VBORender()
 void VBORender::vertexAdd(float x, float y, float z)
 {
     modeBuffer_.push_back(currentMode_);
-    Vertex4F vertex = {x, y, z, 1.0};
+    Vertex4F vertex(x, y, z, 1.0);
     vertexBuffer_.push_back(vertex);
     colorBuffer_.push_back(currentColor_);
     textureIndBuffer_.push_back(currentTexture_);
     textureCoordBuffer_.push_back(currentTextureCoord_);
 }
 
-void VBORender::vertexAdd(Vertex2F& pos, float z)
+void VBORender::vertexAdd(const Vertex2F& pos, float z)
 {
     vertexAdd(pos.x, pos.y, z);
 }
@@ -56,15 +56,15 @@ void VBORender::textureSelect(uint index)
 
 void VBORender::setColor(float r, float g, float b, float a)
 {
-    currentColor_ = {r, g, b, a};
+    currentColor_ = Color(r, g, b, a);
 }
 
 void VBORender::setTextureCoordinates(float s, float t)
 {
-    currentTextureCoord_ = {s, t};
+    currentTextureCoord_ = TextureCoordinates(s, t);
 }
 
-void VBORender::setTextureCoordinates(Vertex2F& pos)
+void VBORender::setTextureCoordinates(const Vertex2F& pos)
 {
     setTextureCoordinates(pos.x, pos.y);
 }
@@ -124,8 +124,8 @@ void VBORender::drawVBOs(QGLShaderProgram* program)
     for (size_t i = 0; i < subBuffers_.size(); i++)
     {
         size_t vSize = sizeof(Vertex4F)*subBuffers_[i].count,
-               cSize = sizeof(Color)*subBuffers_[i].count,
-               tSize = sizeof(TextureCoordinates)*subBuffers_[i].count;
+               cSize = sizeof(Color)*subBuffers_[i].count;
+//               tSize = sizeof(TextureCoordinates)*subBuffers_[i].count;
 
         glBindTexture(GL_TEXTURE_2D, subBuffers_[i].textureIndex);
 

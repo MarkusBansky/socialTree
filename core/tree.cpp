@@ -15,7 +15,7 @@ tree::~tree() {
 
 void tree::destroy_tree(node *leaf){
     if(leaf != NULL){
-        for (int i = 0; i < (*leaf).nodes.size(); i++)
+        for (size_t i = 0; i < (*leaf).nodes.size(); i++)
             destroy_tree((*leaf).nodes[i]);
         delete leaf;
     }
@@ -33,7 +33,7 @@ node *tree::search(QString name, node *leaf)
       if ((*leaf).name == name)
           return leaf;
       node* tmpNode;
-      for (int i = 0; i < (*leaf).nodes.size(); i++)
+      for (size_t i = 0; i < (*leaf).nodes.size(); i++)
       {
           tmpNode = search(name, (*leaf).nodes[i]);
           if (tmpNode != NULL)
@@ -67,7 +67,7 @@ void tree::deleteNode(QString name)
         node* nodeForDel_Parent = nodeForDel->parent;
         if (nodeForDel_Parent != NULL)
         {
-            for (int i = 0; i < nodeForDel_Parent->nodes.size(); i++)
+            for (size_t i = 0; i < nodeForDel_Parent->nodes.size(); i++)
                 if (nodeForDel == nodeForDel_Parent->nodes[i])
                     nodeForDel_Parent->nodes.erase(
                                 nodeForDel_Parent->nodes.begin() + i);
