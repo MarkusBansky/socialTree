@@ -15,7 +15,7 @@ RequestProvider::RequestProvider(RequestManager *_reqManager, coreHandler* _core
 {
     tcpServer = new QTcpServer(this);
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(onNewClient()));
-    if (!tcpServer->listen(QHostAddress::Any, 33333) && server_status==0) {
+    if (!tcpServer->listen(QHostAddress::Any, 4747) && server_status==0) {
         qDebug() <<  QObject::tr("Unable to start the server: %1.").arg(tcpServer->errorString());
     } else {
         server_status=1;
