@@ -55,7 +55,12 @@ void RequestProvider::readClient() {
           "\r\n"
           "<h1>Nothing to see here</h1>\n"
     << QDateTime::currentDateTime().toString() << "\n";
-    // Если нужно закрыть сокет
+    QString temp;
+    while (clientSocket->bytesAvailable())
+    {
+        temp = clientSocket->readAll();
+        qDebug() << temp;
+    }
     clientSocket->close();
     SClients.remove(idusersocs);
 }
