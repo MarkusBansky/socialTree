@@ -70,7 +70,7 @@ sRequest RequestProvider::ProcessLine(QString line) {
     QStringList requestList = line.split(" ", QString::SkipEmptyParts);
     QString cmdString, filePath,
             nameString, parentNameString;
-    if (requestList.size() < 3)
+    if (requestList.size() < 2)
         throw std::invalid_argument("invalid input");
     cmdString = requestList[0];
     nameString = requestList[1].trimmed();
