@@ -62,7 +62,7 @@ void RequestProvider::readClient() {
     }
     catch (...)
     {
-        os << "Adding failed.\n";
+        os << "Failed.\n";
     }
 }
 
