@@ -27,5 +27,7 @@
 
 # QT build directories
 build*/
+debug*/
+release*/
 */android/
 core/scenegraph.h.autosave

@@ -38,7 +38,7 @@ void coreHandler::processRequest(sRequest r){
 }
 
 void coreHandler::addCase(){
-    if(this->gParentName != "NULL"){
+    if(Tree.root != NULL){
         node* parent = Tree.search(this->gParentName);
         node* sameName = Tree.search(this->gName);
         if (sameName != NULL)
