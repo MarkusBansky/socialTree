@@ -74,7 +74,9 @@ sRequest RequestProvider::ProcessLine(QString line) {
     nameString = requestList[1].trimmed();
     parentNameString = "";
     filePath = "";
-    if (requestList.size() >= 3) {
+    if ((requestList.size() >= 2) && (requestList.size() < 4))
+        throw std::invalid_argument("invalid input");
+    if (requestList.size() >= 4) {
         parentNameString = requestList[2];
         filePath = requestList[3];
     }
