@@ -27,6 +27,10 @@ void RequestProvider::onNewClient() {
         QTcpSocket* clientSocket=tcpServer->nextPendingConnection();
         int idusersocs=clientSocket->socketDescriptor();
         SClients[idusersocs]=clientSocket;
+        QTextStream os(clientSocket);
+        os.setAutoDetectUnicode(true);
+        os << "Connection established"
+        << QDateTime::currentDateTime().toString() << "\n";
         connect(SClients[idusersocs],SIGNAL(readyRead()),this, SLOT(readClient()));
     }
 
@@ -37,8 +41,6 @@ void RequestProvider::readClient() {
     int idusersocs=clientSocket->socketDescriptor();
     QTextStream os(clientSocket);
     os.setAutoDetectUnicode(true);
-    os << "Connection established"
-    << QDateTime::currentDateTime().toString() << "\n";
     QString clientMsg;
     while (clientSocket->bytesAvailable())
     {

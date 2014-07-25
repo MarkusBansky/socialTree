@@ -4,7 +4,6 @@ INPUT(
 ./release\coreHandler.o
 ./release\MainWidget.o
 ./release\VBORender.o
-./release\requestmanager.o
 ./release\requestprovider.o
 ./release\scenegraph.o
 ./release\AnimationManager.o

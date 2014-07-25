@@ -4,7 +4,6 @@ INPUT(
 ./debug\coreHandler.o
 ./debug\MainWidget.o
 ./debug\VBORender.o
-./debug\requestmanager.o
 ./debug\requestprovider.o
 ./debug\scenegraph.o
 ./debug\AnimationManager.o

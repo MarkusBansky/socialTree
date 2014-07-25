@@ -3,6 +3,7 @@
 #include "tree.h"
 #include "scenegraph.h"
 #include "../opengl/MainWidget.h"
+#include <stdexcept>
 #define ull unsigned long long int
 #undef DELETE
 
@@ -39,10 +40,21 @@ void coreHandler::processRequest(sRequest r){
 void coreHandler::addCase(){
     if(this->gParentName != "NULL"){
         node* parent = Tree.search(this->gParentName);
+        node* sameName = Tree.search(this->gName);
+        if (sameName != NULL)
+        {
+            throw std::invalid_argument("same name");
+            return;
+        }
         if (parent != NULL)
             Tree.insert(gName, parent, image);
     }
     else{
+        if (Tree.root != NULL)
+        {
+            throw std::invalid_argument("same name");
+            return;
+        }
         Tree.insertRoot(gName, image);
     }
 }
